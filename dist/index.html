@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#73bf1d">
+<meta name="description" content="蛋仔吃豆岛：1000张开阔草坪地图，第三人称探索，吃巨型分值豆子，积分达标过关。传送门、机关、100种敌人、三种武器与长按连发和一次性护盾。">
+<title>蛋仔吃豆岛 · 1000张开放地图</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/arena.css"><link rel="stylesheet" href="/adventure.css">
+</head>
+<body class="awaiting-start">
+<div id="game" aria-label="开放草坪3D吃豆游戏场景"></div>
+<header class="topbar">
+ <div class="brand"><img src="/favicon.svg" alt=""><div>蛋仔吃豆岛<small>BEAN ADVENTURE</small></div></div>
+ <button id="level-select" class="level-pill" aria-label="打开1000张地图大厅"><span class="level-disc">01</span><span><small id="world-name">第1章 · 云朵游乐场</small><strong id="level-name">青草大乐园</strong></span><span class="chevron">⌄</span></button>
+ <div class="tools"><button id="code-entry" class="code-button">地图码</button><button id="overview" class="icon-button" aria-label="切换全图视角" title="全图视角 M">▦</button><button id="sound" class="icon-button" aria-label="开启音效" title="开启音效">♫</button><button id="help" class="icon-button" aria-label="操作说明" title="操作说明">?</button><button id="pause" class="icon-button" aria-label="暂停游戏" title="暂停 Esc">Ⅱ</button></div>
+</header>
+<aside class="mission" aria-label="吃豆积分目标">
+ <div class="eyebrow">第 <span id="level-number">1</span> / 1000 关</div><h1 id="mission-title">吃豆积分，闯过这一关</h1>
+ <div class="challenge-goal" id="challenge-goal" hidden><span>闯关模式</span><strong id="challenge-name">别踩岩浆</strong><small id="challenge-route">走到金色终点门</small></div>
+ <div class="bean-goal"><span class="bean-icon crown" aria-hidden="true">♛</span><strong id="score-current">0</strong><span class="score-divider">/</span><b id="score-target">12</b><output id="score-pop" class="score-pop"></output></div>
+ <p id="mission-tip">吃豆子，累计 12 分就过关！</p>
+ <div class="health-row"><span id="health" aria-label="生命 3 / 3">♥♥♥</span><span id="monster-count">击败 0 / 3</span></div>
+ <details class="hud-details"><summary>豆子 · 敌人 · 地图信息 <span>⌄</span></summary><div class="hud-detail-content">
+  <div id="enemy-rank-row" class="enemy-rank-row" aria-label="本关敌人强度与100种图鉴"></div>
+  <div class="bean-legend" aria-label="正分豆：1、5、10分；第101关起100、500分，第501关起1000分"><span><i class="bean-one"></i>1</span><span><i class="bean-five"></i>5</span><span><i class="bean-ten"></i>10</span><span data-late-bean hidden><i class="bean-hundred"></i>100</span><span data-late-bean hidden><i class="bean-fivehundred"></i>500</span><span data-thousand-bean hidden><i class="bean-thousand"></i>1000</span></div>
+  <div class="danger-legend" aria-label="危险豆"><span><i class="bean-negative"></i><b id="penalty-value">−10</b> 扣分</span><span><i class="bean-zero"></i>×0 清零</span><small>×0 后正分豆重新出现</small></div>
+  <div class="bean-count">累计吃豆 <span id="bean-count">0</span> 次</div><div id="bean-refresh" class="bean-refresh" aria-live="off">正分豆吃掉后 30 秒刷新</div>
+  <div class="mission-bottom"><span>关卡难度</span><span id="difficulty">● ○ ○ ○ ○</span></div><div class="progress-track"><i id="progress-fill"></i></div><div class="progress-label"><span>积分进度</span><span id="progress-text">0%</span><span>达标通关</span></div>
+  <button id="copy-code" class="map-code-chip" title="复制当前地图码">地图码 <strong id="current-code">DZ-001</strong> ⧉</button>
+ </div></details>
+</aside>
+<div class="stats"><div class="timer-display"><small>本关用时</small><strong id="timer">00:00.0</strong></div><div class="star-count"><span>●</span><strong id="score-total">0 / 12 分</strong></div></div>
+<button id="minimap-button" class="minimap-panel" aria-label="查看整张地图"><span>全图导航 <b>M</b></span><canvas id="minimap" width="300" height="300" aria-label="豆子、怪物、护盾、传送门与角色位置"></canvas><small class="minimap-values"><i class="bean-one"></i>1 <i class="bean-five"></i>5 <i class="bean-ten"></i>10<span class="late-minimap-values" data-late-bean hidden><i class="bean-hundred"></i>100<i class="bean-fivehundred"></i>500</span><span data-thousand-bean hidden><i class="bean-thousand"></i>1000</span> 分</small><small><span class="monster-marker">▲</span>怪物　<span class="shield-marker">◇</span>护盾　A/B门</small></button>
+<aside id="adventure-panel" class="adventure-panel" aria-label="Adventure tools"></aside><div class="weapon-panel" aria-label="选择武器，F或J攻击，Q切换"><div class="weapon-caption"><strong id="weapon-name">玩具锤</strong><span id="shield-status" class="shield-status">◇ 护盾可拾取</span></div><div class="weapon-slots"><button class="weapon-slot equipped" data-weapon="hammer" aria-label="装备玩具锤，按1" aria-pressed="true"><b>1</b><i>🔨</i><span>玩具锤</span></button><button class="weapon-slot" data-weapon="launcher" aria-label="装备泡泡发射器，按2" aria-pressed="false"><b>2</b><i>◉</i><span>发射器</span></button><button class="weapon-slot" data-weapon="sword" aria-label="装备能量剑，按3" aria-pressed="false"><b>3</b><i>✦</i><span>能量剑</span></button></div></div>
+<div class="scene-label"><span>DZ-001</span><strong>青草大乐园</strong></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="ready" class="ready"><span class="ready-tag">1000 张开放地图</span><h2>大口吃豆，自由冒险！</h2><p>吃豆达标过关</p><button id="start" class="primary">开始吃豆 <span>▶</span></button><small>WASD 移动 · 空格跳跃 · ? 操作说明</small></div>
+<footer class="bottom-controls"><div class="keyboard-guide"><div class="key-row"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><span>行走<small>也可用方向键</small></span><i></i><div><kbd>Space</kbd><span>跳跃</span></div><div><kbd>Shift</kbd><span>翻滚</span></div><div><kbd>E</kbd><span>飞扑</span></div><button id="restart" title="从本关起点重新开始；R返回检查点">↻ <span>重来</span></button></div><div id="touch-joystick" class="joystick" aria-label="拖动摇杆行走"><span></span><b>移动</b></div><div class="action-buttons"><button id="attack" class="action attack-action" aria-label="攻击，点按一发，长按每0.3秒连发"><span id="attack-symbol">🔨</span><strong>攻击</strong><small>F/J · 长按</small><i></i></button><button id="roll" class="action roll"><span>⟳</span><strong>翻滚</strong><small>Shift</small><i></i></button><button id="dive" class="action dive"><span>➤</span><strong>飞扑</strong><small>E</small><i></i></button><button id="jump" class="action jump"><span>↟</span><strong>跳跃</strong><small>Space</small></button></div></footer>
+<div id="modal" class="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1"><button id="modal-close" class="close-button" aria-label="关闭弹窗">×</button><div id="modal-content"></div></section></div>
+<div id="loading" class="loading"><img src="/favicon.svg" alt=""><strong>正在打开吃豆岛…</strong></div>
+<script type="module" src="/app.js"></script>
+</body></html>
