@@ -1,0 +1,712 @@
+{
+  "version": "Open grass arenas with giant radius-based beans, 100 enemy types and single-click zero-cooldown attacks",
+  "passed": 13,
+  "total": 13,
+  "sampledLevelIds": [
+    1,
+    100,
+    101,
+    1000,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "frameHz": 30,
+  "wallSeconds": 2.08,
+  "sourceSha256": {
+    "levels": "295939be6ee0dfc18c5504daa79289300f29bc637ca0ae99df4cb00022ea8f55",
+    "engine": "9805bef61851ec9a1c70af5364c4bc6ad9abe12f7d5de1cec0eb6696d28c3a06",
+    "combat": "c62fedc92933634ce03d9c85168b47e5656b275ae255d9d5d36e25726d356c5c",
+    "enemies": "bcfebb1c09a1b507e851c01e71c3037f54a59ff1754274e716e419eaddd37a78",
+    "shields": "457e35fe06396633f60d1100aae21090ab881fd17c36961dd775bd037fa971c6"
+  },
+  "coverage": "Only the listed maps were played using Game.step movement and explicit ordinary actions. No R rescue, position, score or monster state edits. The engine handles physical bean-radius contact.",
+  "results": [
+    {
+      "id": 1,
+      "code": "DZ-001",
+      "arenaOpen": true,
+      "layout": "圆环草坪",
+      "status": "won",
+      "beans": 2,
+      "score": 20,
+      "target": 12,
+      "totalScore": 96,
+      "scoreMatchesCollection": true,
+      "time": 6.3,
+      "wallSeconds": 0.054,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 0,
+        "dive": 0,
+        "attack": 7
+      },
+      "position": {
+        "x": 11.84,
+        "z": 34.02,
+        "y": 0,
+        "ground": 562
+      },
+      "pathHead": [
+        [
+          18,
+          25
+        ]
+      ]
+    },
+    {
+      "id": 100,
+      "code": "DZ-100",
+      "arenaOpen": true,
+      "layout": "冠军大广场",
+      "status": "won",
+      "beans": 18,
+      "score": 114,
+      "target": 111,
+      "totalScore": 191,
+      "scoreMatchesCollection": true,
+      "time": 36.2,
+      "wallSeconds": 0.28,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 3,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 7,
+      "enemyTier": 10,
+      "typeIds": [
+        "E010",
+        "E003",
+        "E007",
+        "E004",
+        "E005",
+        "E008"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 3,
+      "actions": {
+        "jump": 0,
+        "roll": 6,
+        "dive": 0,
+        "attack": 71
+      },
+      "position": {
+        "x": -42.4,
+        "z": 27.18,
+        "y": 0,
+        "ground": 579
+      },
+      "pathHead": [
+        [
+          2,
+          23
+        ]
+      ]
+    },
+    {
+      "id": 101,
+      "code": "DZ-101",
+      "arenaOpen": true,
+      "layout": "圆环草坪",
+      "status": "won",
+      "beans": 1,
+      "score": 500,
+      "target": 112,
+      "totalScore": 676,
+      "scoreMatchesCollection": true,
+      "time": 13.1,
+      "wallSeconds": 0.043,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 5,
+      "enemyTier": 11,
+      "typeIds": [
+        "E011",
+        "E005",
+        "E007",
+        "E003",
+        "E010"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 2,
+      "actions": {
+        "jump": 0,
+        "roll": 3,
+        "dive": 0,
+        "attack": 47
+      },
+      "position": {
+        "x": -35.02,
+        "z": 13.59,
+        "y": 0,
+        "ground": 405
+      },
+      "pathHead": [
+        [
+          4,
+          19
+        ]
+      ]
+    },
+    {
+      "id": 1000,
+      "code": "DZ-1000",
+      "arenaOpen": true,
+      "layout": "冠军大广场",
+      "status": "won",
+      "beans": 83,
+      "score": 1013,
+      "target": 1011,
+      "totalScore": 1087,
+      "scoreMatchesCollection": true,
+      "time": 155.1,
+      "wallSeconds": 1.183,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 5,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 10,
+      "enemyTier": 100,
+      "typeIds": [
+        "E100",
+        "E048",
+        "E097",
+        "E049",
+        "E095",
+        "E050",
+        "E098",
+        "E096"
+      ],
+      "ranks": [
+        "boss",
+        "armored"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 23,
+        "dive": 0,
+        "attack": 1321
+      },
+      "position": {
+        "x": -32.04,
+        "z": -6.82,
+        "y": 0,
+        "ground": 449
+      },
+      "pathHead": [
+        [
+          9,
+          16
+        ]
+      ]
+    },
+    {
+      "id": 2,
+      "code": "DZ-002",
+      "arenaOpen": true,
+      "layout": "花田广场",
+      "status": "won",
+      "beans": 2,
+      "score": 15,
+      "target": 13,
+      "totalScore": 96,
+      "scoreMatchesCollection": true,
+      "time": 5.6,
+      "wallSeconds": 0.019,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 0,
+        "dive": 0,
+        "attack": 6
+      },
+      "position": {
+        "x": 16.98,
+        "z": 28.59,
+        "y": 0,
+        "ground": 627
+      },
+      "pathHead": [
+        [
+          20,
+          23
+        ]
+      ]
+    },
+    {
+      "id": 3,
+      "code": "DZ-003",
+      "arenaOpen": true,
+      "layout": "阳光椭圆",
+      "status": "won",
+      "beans": 3,
+      "score": 16,
+      "target": 14,
+      "totalScore": 96,
+      "scoreMatchesCollection": true,
+      "time": 5.6,
+      "wallSeconds": 0.019,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 0,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 1,
+      "shieldsCollected": 1,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 16
+      },
+      "position": {
+        "x": 42.5,
+        "z": 0,
+        "y": 0,
+        "ground": 284
+      },
+      "pathHead": [
+        [
+          28,
+          15
+        ]
+      ]
+    },
+    {
+      "id": 4,
+      "code": "DZ-004",
+      "arenaOpen": true,
+      "layout": "四叶花园",
+      "status": "won",
+      "beans": 3,
+      "score": 20,
+      "target": 15,
+      "totalScore": 96,
+      "scoreMatchesCollection": true,
+      "time": 8.5,
+      "wallSeconds": 0.023,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 0,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 16
+      },
+      "position": {
+        "x": 42.56,
+        "z": 20.38,
+        "y": 0,
+        "ground": 515
+      },
+      "pathHead": [
+        [
+          28,
+          21
+        ]
+      ]
+    },
+    {
+      "id": 5,
+      "code": "DZ-005",
+      "arenaOpen": true,
+      "layout": "八角乐园",
+      "status": "won",
+      "beans": 2,
+      "score": 20,
+      "target": 16,
+      "totalScore": 96,
+      "scoreMatchesCollection": true,
+      "time": 7.6,
+      "wallSeconds": 0.017,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 0,
+        "dive": 0,
+        "attack": 8
+      },
+      "position": {
+        "x": 17.02,
+        "z": 39.16,
+        "y": 0,
+        "ground": 672
+      },
+      "pathHead": [
+        [
+          20,
+          27
+        ]
+      ]
+    },
+    {
+      "id": 6,
+      "code": "DZ-006",
+      "arenaOpen": true,
+      "layout": "草坡露台",
+      "status": "won",
+      "beans": 5,
+      "score": 26,
+      "target": 17,
+      "totalScore": 96,
+      "scoreMatchesCollection": true,
+      "time": 10.5,
+      "wallSeconds": 0.057,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 0,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 17
+      },
+      "position": {
+        "x": 42.56,
+        "z": -6.82,
+        "y": 0,
+        "ground": 358
+      },
+      "pathHead": [
+        [
+          28,
+          13
+        ]
+      ]
+    },
+    {
+      "id": 7,
+      "code": "DZ-007",
+      "arenaOpen": true,
+      "layout": "彩虹野餐地",
+      "status": "won",
+      "beans": 3,
+      "score": 25,
+      "target": 18,
+      "totalScore": 96,
+      "scoreMatchesCollection": true,
+      "time": 10.8,
+      "wallSeconds": 0.022,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 3,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 6
+      },
+      "position": {
+        "x": 44.18,
+        "z": 28.84,
+        "y": 0,
+        "ground": 633
+      },
+      "pathHead": [
+        [
+          28,
+          23
+        ]
+      ]
+    },
+    {
+      "id": 8,
+      "code": "DZ-008",
+      "arenaOpen": true,
+      "layout": "风车草场",
+      "status": "won",
+      "beans": 4,
+      "score": 22,
+      "target": 19,
+      "totalScore": 97,
+      "scoreMatchesCollection": true,
+      "time": 16.6,
+      "wallSeconds": 0.026,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 4,
+        "dive": 0,
+        "attack": 21
+      },
+      "position": {
+        "x": -44.18,
+        "z": 5.16,
+        "y": 0,
+        "ground": 306
+      },
+      "pathHead": [
+        [
+          2,
+          17
+        ]
+      ]
+    },
+    {
+      "id": 9,
+      "code": "DZ-009",
+      "arenaOpen": true,
+      "layout": "海湾草岛",
+      "status": "won",
+      "beans": 4,
+      "score": 21,
+      "target": 20,
+      "totalScore": 97,
+      "scoreMatchesCollection": true,
+      "time": 6.5,
+      "wallSeconds": 0.015,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 2,
+        "dive": 0,
+        "attack": 6
+      },
+      "position": {
+        "x": 23.82,
+        "z": 28.68,
+        "y": 0,
+        "ground": 624
+      },
+      "pathHead": [
+        [
+          22,
+          23
+        ]
+      ]
+    },
+    {
+      "id": 10,
+      "code": "DZ-010",
+      "arenaOpen": true,
+      "layout": "冠军大广场",
+      "status": "won",
+      "beans": 3,
+      "score": 25,
+      "target": 21,
+      "totalScore": 97,
+      "scoreMatchesCollection": true,
+      "time": 13.1,
+      "wallSeconds": 0.028,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 8
+      },
+      "position": {
+        "x": -42.56,
+        "z": -0.02,
+        "y": 0,
+        "ground": 347
+      },
+      "pathHead": [
+        [
+          2,
+          15
+        ]
+      ]
+    }
+  ],
+  "summary": {
+    "falls": 0,
+    "combatRespawns": 0,
+    "recoveryInputs": 0,
+    "portals": 20,
+    "defeatedMonsters": 13,
+    "shieldsCollected": 1,
+    "shieldsUsed": 0,
+    "explicitAttackActions": 1550,
+    "scoreMatchesCollection": true
+  },
+  "trapBeanCoverage": false,
+  "ruleVersion": "Open arena baseline before subtract/zero beans and positive bean replenishment"
+}

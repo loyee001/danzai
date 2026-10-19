@@ -1,0 +1,1274 @@
+{
+  "passed": 21,
+  "total": 21,
+  "frameHz": 30,
+  "wallSeconds": 39.1,
+  "coverage": "Every listed map played using Game.step movement and ordinary actions; no position, score or monster state changes.",
+  "results": [
+    {
+      "id": 1,
+      "code": "DZ-001",
+      "status": "won",
+      "beans": 3,
+      "score": 16,
+      "target": 12,
+      "totalScore": 82,
+      "scoreMatchesCollection": true,
+      "time": 3.3,
+      "wallSeconds": 0.022,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 0,
+        "dive": 0,
+        "attack": 1
+      },
+      "position": {
+        "x": -0.02,
+        "z": -2.63,
+        "y": 0,
+        "ground": 75
+      },
+      "pathHead": [
+        [
+          8,
+          7
+        ]
+      ]
+    },
+    {
+      "id": 10,
+      "code": "DZ-010",
+      "status": "won",
+      "beans": 5,
+      "score": 22,
+      "target": 21,
+      "totalScore": 108,
+      "scoreMatchesCollection": true,
+      "time": 5.6,
+      "wallSeconds": 0.017,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 2,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 3
+      },
+      "position": {
+        "x": 10.22,
+        "z": 9.46,
+        "y": 0,
+        "ground": 118
+      },
+      "pathHead": [
+        [
+          11,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          11,
+          14
+        ]
+      ]
+    },
+    {
+      "id": 11,
+      "code": "DZ-011",
+      "status": "won",
+      "beans": 5,
+      "score": 22,
+      "target": 22,
+      "totalScore": 109,
+      "scoreMatchesCollection": true,
+      "time": 8.1,
+      "wallSeconds": 0.031,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 2,
+      "typeIds": [
+        "E002",
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 2,
+        "dive": 0,
+        "attack": 4
+      },
+      "position": {
+        "x": -27.18,
+        "z": 26.42,
+        "y": 0,
+        "ground": 180
+      },
+      "pathHead": [
+        [
+          1,
+          17
+        ]
+      ]
+    },
+    {
+      "id": 190,
+      "code": "DZ-190",
+      "status": "won",
+      "beans": 60,
+      "score": 201,
+      "target": 201,
+      "totalScore": 704,
+      "scoreMatchesCollection": true,
+      "time": 41.7,
+      "wallSeconds": 0.382,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 5,
+      "enemyTier": 19,
+      "typeIds": [
+        "E019",
+        "E007",
+        "E016",
+        "E008",
+        "E014"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 2,
+        "roll": 5,
+        "dive": 0,
+        "attack": 42
+      },
+      "position": {
+        "x": -26.4,
+        "z": 40.78,
+        "y": 0,
+        "ground": 380
+      },
+      "pathHead": [
+        [
+          5,
+          25
+        ],
+        [
+          4,
+          25
+        ]
+      ]
+    },
+    {
+      "id": 200,
+      "code": "DZ-200",
+      "status": "won",
+      "beans": 68,
+      "score": 214,
+      "target": 211,
+      "totalScore": 694,
+      "scoreMatchesCollection": true,
+      "time": 36.2,
+      "wallSeconds": 0.454,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 3,
+      "weapon": "launcher",
+      "health": 2,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 5,
+      "enemyTier": 20,
+      "typeIds": [
+        "E020",
+        "E010",
+        "E017",
+        "E008",
+        "E015"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 3,
+        "roll": 4,
+        "dive": 0,
+        "attack": 37
+      },
+      "position": {
+        "x": -31.5,
+        "z": -0.02,
+        "y": 0,
+        "ground": 140
+      },
+      "pathHead": [
+        [
+          2,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          4,
+          11
+        ]
+      ]
+    },
+    {
+      "id": 201,
+      "code": "DZ-201",
+      "status": "won",
+      "beans": 64,
+      "score": 214,
+      "target": 212,
+      "totalScore": 741,
+      "scoreMatchesCollection": true,
+      "time": 40.5,
+      "wallSeconds": 0.473,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 3,
+      "weapon": "launcher",
+      "health": 2,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 5,
+      "enemyTier": 21,
+      "typeIds": [
+        "E021",
+        "E009",
+        "E017",
+        "E010",
+        "E020"
+      ],
+      "ranks": [
+        "swift",
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 2,
+        "roll": 5,
+        "dive": 0,
+        "attack": 48
+      },
+      "position": {
+        "x": -17.89,
+        "z": 37.38,
+        "y": 0,
+        "ground": 318
+      },
+      "pathHead": [
+        [
+          7,
+          23
+        ]
+      ]
+    },
+    {
+      "id": 390,
+      "code": "DZ-390",
+      "status": "won",
+      "beans": 127,
+      "score": 410,
+      "target": 401,
+      "totalScore": 1098,
+      "scoreMatchesCollection": true,
+      "time": 72.3,
+      "wallSeconds": 0.746,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 4,
+      "weapon": "hammer",
+      "health": 2,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 6,
+      "enemyTier": 39,
+      "typeIds": [
+        "E039",
+        "E018",
+        "E036",
+        "E019",
+        "E034",
+        "E017"
+      ],
+      "ranks": [
+        "swift",
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 5,
+        "roll": 8,
+        "dive": 0,
+        "attack": 74
+      },
+      "position": {
+        "x": 37.41,
+        "z": -0.83,
+        "y": 0.38,
+        "ground": null
+      },
+      "pathHead": [
+        [
+          25,
+          14
+        ]
+      ]
+    },
+    {
+      "id": 400,
+      "code": "DZ-400",
+      "status": "won",
+      "beans": 122,
+      "score": 413,
+      "target": 411,
+      "totalScore": 848,
+      "scoreMatchesCollection": true,
+      "time": 64.7,
+      "wallSeconds": 0.561,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 1,
+      "shieldsUsed": 1,
+      "monsters": 6,
+      "enemyTier": 40,
+      "typeIds": [
+        "E040",
+        "E018",
+        "E037",
+        "E019",
+        "E035",
+        "E020"
+      ],
+      "ranks": [
+        "swift",
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 6,
+        "roll": 8,
+        "dive": 0,
+        "attack": 80
+      },
+      "position": {
+        "x": 22.9,
+        "z": 30.58,
+        "y": 0,
+        "ground": 321
+      },
+      "pathHead": [
+        [
+          19,
+          21
+        ]
+      ]
+    },
+    {
+      "id": 401,
+      "code": "DZ-401",
+      "status": "won",
+      "beans": 143,
+      "score": 417,
+      "target": 412,
+      "totalScore": 913,
+      "scoreMatchesCollection": true,
+      "time": 98.1,
+      "wallSeconds": 1.14,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 5,
+      "weapon": "launcher",
+      "health": 2,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 7,
+      "enemyTier": 41,
+      "typeIds": [
+        "E041",
+        "E020",
+        "E037",
+        "E018",
+        "E040",
+        "E019",
+        "E038"
+      ],
+      "ranks": [
+        "armored",
+        "normal",
+        "swift"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 11,
+        "roll": 5,
+        "dive": 0,
+        "attack": 120
+      },
+      "position": {
+        "x": 40.78,
+        "z": -0.75,
+        "y": 0,
+        "ground": 202
+      },
+      "pathHead": [
+        [
+          25,
+          13
+        ]
+      ]
+    },
+    {
+      "id": 590,
+      "code": "DZ-590",
+      "status": "won",
+      "beans": 200,
+      "score": 604,
+      "target": 601,
+      "totalScore": 1233,
+      "scoreMatchesCollection": true,
+      "time": 109.1,
+      "wallSeconds": 2.133,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 3,
+      "weapon": "launcher",
+      "health": 1,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 8,
+      "enemyTier": 59,
+      "typeIds": [
+        "E059",
+        "E029",
+        "E056",
+        "E027",
+        "E054",
+        "E028",
+        "E057"
+      ],
+      "ranks": [
+        "armored",
+        "swift"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 5,
+        "roll": 15,
+        "dive": 0,
+        "attack": 114
+      },
+      "position": {
+        "x": -20.38,
+        "z": 38.37,
+        "y": 0,
+        "ground": 441
+      },
+      "pathHead": [
+        [
+          9,
+          26
+        ],
+        [
+          9,
+          25
+        ],
+        [
+          10,
+          25
+        ]
+      ]
+    },
+    {
+      "id": 600,
+      "code": "DZ-600",
+      "status": "won",
+      "beans": 203,
+      "score": 612,
+      "target": 611,
+      "totalScore": 946,
+      "scoreMatchesCollection": true,
+      "time": 109.4,
+      "wallSeconds": 1.538,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 3,
+      "weapon": "launcher",
+      "health": 1,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 8,
+      "enemyTier": 60,
+      "typeIds": [
+        "E060",
+        "E029",
+        "E057",
+        "E030",
+        "E055",
+        "E028",
+        "E058"
+      ],
+      "ranks": [
+        "armored",
+        "swift"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 3,
+        "roll": 12,
+        "dive": 0,
+        "attack": 108
+      },
+      "position": {
+        "x": 0.02,
+        "z": 4.3,
+        "y": 0,
+        "ground": 214
+      },
+      "pathHead": [
+        [
+          13,
+          14
+        ]
+      ]
+    },
+    {
+      "id": 601,
+      "code": "DZ-601",
+      "status": "won",
+      "beans": 209,
+      "score": 612,
+      "target": 612,
+      "totalScore": 1056,
+      "scoreMatchesCollection": true,
+      "time": 128.8,
+      "wallSeconds": 2.887,
+      "falls": 0,
+      "combatRespawns": 1,
+      "recoveryInputs": 0,
+      "portals": 5,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 8,
+      "enemyTier": 61,
+      "typeIds": [
+        "E061",
+        "E028",
+        "E057",
+        "E029",
+        "E060",
+        "E030",
+        "E058"
+      ],
+      "ranks": [
+        "elite",
+        "swift",
+        "armored"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 14,
+        "roll": 16,
+        "dive": 0,
+        "attack": 155
+      },
+      "position": {
+        "x": 44.18,
+        "z": -12.82,
+        "y": 0,
+        "ground": 162
+      },
+      "pathHead": [
+        [
+          27,
+          10
+        ],
+        [
+          27,
+          9
+        ]
+      ]
+    },
+    {
+      "id": 790,
+      "code": "DZ-790",
+      "status": "won",
+      "beans": 277,
+      "score": 803,
+      "target": 801,
+      "totalScore": 1407,
+      "scoreMatchesCollection": true,
+      "time": 163.5,
+      "wallSeconds": 3.696,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 4,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 1,
+      "shieldsCollected": 1,
+      "shieldsUsed": 0,
+      "monsters": 9,
+      "enemyTier": 79,
+      "typeIds": [
+        "E079",
+        "E037",
+        "E076",
+        "E038",
+        "E074",
+        "E039",
+        "E077",
+        "E075"
+      ],
+      "ranks": [
+        "elite",
+        "swift"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 8,
+        "roll": 25,
+        "dive": 0,
+        "attack": 161
+      },
+      "position": {
+        "x": 23.79,
+        "z": 34.96,
+        "y": 0,
+        "ground": 476
+      },
+      "pathHead": [
+        [
+          23,
+          26
+        ],
+        [
+          23,
+          25
+        ],
+        [
+          23,
+          24
+        ]
+      ]
+    },
+    {
+      "id": 791,
+      "code": "DZ-791",
+      "status": "won",
+      "beans": 299,
+      "score": 806,
+      "target": 802,
+      "totalScore": 1046,
+      "scoreMatchesCollection": true,
+      "time": 198.6,
+      "wallSeconds": 3.35,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 5,
+      "weapon": "launcher",
+      "health": 2,
+      "shield": 0,
+      "shieldsCollected": 1,
+      "shieldsUsed": 1,
+      "monsters": 9,
+      "enemyTier": 80,
+      "typeIds": [
+        "E080",
+        "E040",
+        "E076",
+        "E038",
+        "E079",
+        "E039",
+        "E077",
+        "E075"
+      ],
+      "ranks": [
+        "elite",
+        "swift"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 21,
+        "roll": 21,
+        "dive": 0,
+        "attack": 243
+      },
+      "position": {
+        "x": -23.82,
+        "z": -12.63,
+        "y": 0,
+        "ground": 152
+      },
+      "pathHead": [
+        [
+          7,
+          10
+        ]
+      ]
+    },
+    {
+      "id": 800,
+      "code": "DZ-800",
+      "status": "won",
+      "beans": 278,
+      "score": 812,
+      "target": 811,
+      "totalScore": 1126,
+      "scoreMatchesCollection": true,
+      "time": 162.5,
+      "wallSeconds": 2.143,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 5,
+      "weapon": "launcher",
+      "health": 2,
+      "shield": 0,
+      "shieldsCollected": 1,
+      "shieldsUsed": 1,
+      "monsters": 9,
+      "enemyTier": 80,
+      "typeIds": [
+        "E080",
+        "E040",
+        "E077",
+        "E038",
+        "E075",
+        "E039",
+        "E078",
+        "E076"
+      ],
+      "ranks": [
+        "elite",
+        "swift"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 13,
+        "roll": 13,
+        "dive": 0,
+        "attack": 214
+      },
+      "position": {
+        "x": 10.22,
+        "z": 21.3,
+        "y": 0,
+        "ground": 335
+      },
+      "pathHead": [
+        [
+          17,
+          20
+        ],
+        [
+          17,
+          19
+        ],
+        [
+          16,
+          19
+        ]
+      ]
+    },
+    {
+      "id": 801,
+      "code": "DZ-801",
+      "status": "won",
+      "beans": 286,
+      "score": 812,
+      "target": 812,
+      "totalScore": 1188,
+      "scoreMatchesCollection": true,
+      "time": 172.6,
+      "wallSeconds": 2.916,
+      "falls": 0,
+      "combatRespawns": 1,
+      "recoveryInputs": 0,
+      "portals": 7,
+      "weapon": "hammer",
+      "health": 1,
+      "shield": 0,
+      "shieldsCollected": 1,
+      "shieldsUsed": 1,
+      "monsters": 9,
+      "enemyTier": 81,
+      "typeIds": [
+        "E081",
+        "E039",
+        "E077",
+        "E040",
+        "E080",
+        "E038",
+        "E078",
+        "E076"
+      ],
+      "ranks": [
+        "boss",
+        "swift",
+        "elite"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 9,
+        "roll": 19,
+        "dive": 0,
+        "attack": 164
+      },
+      "position": {
+        "x": 2.5,
+        "z": -47.58,
+        "y": 0,
+        "ground": 13
+      },
+      "pathHead": [
+        [
+          16,
+          1
+        ]
+      ]
+    },
+    {
+      "id": 867,
+      "code": "DZ-867",
+      "status": "won",
+      "beans": 262,
+      "score": 887,
+      "target": 878,
+      "totalScore": 1804,
+      "scoreMatchesCollection": true,
+      "time": 133.9,
+      "wallSeconds": 1.43,
+      "falls": 0,
+      "combatRespawns": 1,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 10,
+      "enemyTier": 87,
+      "typeIds": [
+        "E087",
+        "E042",
+        "E082",
+        "E043",
+        "E085",
+        "E041",
+        "E083",
+        "E086"
+      ],
+      "ranks": [
+        "boss",
+        "armored"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 16,
+        "dive": 0,
+        "attack": 156
+      },
+      "position": {
+        "x": 46.7,
+        "z": 10.18,
+        "y": 0,
+        "ground": 461
+      },
+      "pathHead": [
+        [
+          29,
+          18
+        ]
+      ]
+    },
+    {
+      "id": 990,
+      "code": "DZ-990",
+      "status": "won",
+      "beans": 339,
+      "score": 1001,
+      "target": 1001,
+      "totalScore": 1597,
+      "scoreMatchesCollection": true,
+      "time": 193.1,
+      "wallSeconds": 3.799,
+      "falls": 0,
+      "combatRespawns": 2,
+      "recoveryInputs": 0,
+      "portals": 3,
+      "weapon": "launcher",
+      "health": 1,
+      "shield": 0,
+      "shieldsCollected": 1,
+      "shieldsUsed": 1,
+      "monsters": 10,
+      "enemyTier": 99,
+      "typeIds": [
+        "E099",
+        "E048",
+        "E096",
+        "E049",
+        "E094",
+        "E047",
+        "E097",
+        "E095"
+      ],
+      "ranks": [
+        "boss",
+        "armored"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 8,
+        "roll": 20,
+        "dive": 0,
+        "attack": 163
+      },
+      "position": {
+        "x": 47.58,
+        "z": -36.65,
+        "y": 0,
+        "ground": 129
+      },
+      "pathHead": [
+        [
+          31,
+          6
+        ],
+        [
+          31,
+          5
+        ],
+        [
+          31,
+          4
+        ]
+      ]
+    },
+    {
+      "id": 991,
+      "code": "DZ-991",
+      "status": "won",
+      "beans": 384,
+      "score": 1008,
+      "target": 1002,
+      "totalScore": 1182,
+      "scoreMatchesCollection": true,
+      "time": 271.2,
+      "wallSeconds": 4.475,
+      "falls": 0,
+      "combatRespawns": 2,
+      "recoveryInputs": 0,
+      "portals": 9,
+      "weapon": "launcher",
+      "health": 1,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 10,
+      "enemyTier": 100,
+      "typeIds": [
+        "E100",
+        "E048",
+        "E096",
+        "E049",
+        "E099",
+        "E050",
+        "E097",
+        "E095"
+      ],
+      "ranks": [
+        "boss",
+        "armored"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 19,
+        "roll": 32,
+        "dive": 0,
+        "attack": 302
+      },
+      "position": {
+        "x": 40.78,
+        "z": -0.95,
+        "y": 0,
+        "ground": 256
+      },
+      "pathHead": [
+        [
+          27,
+          15
+        ]
+      ]
+    },
+    {
+      "id": 995,
+      "code": "DZ-995",
+      "status": "won",
+      "beans": 339,
+      "score": 1007,
+      "target": 1006,
+      "totalScore": 1336,
+      "scoreMatchesCollection": true,
+      "time": 216.6,
+      "wallSeconds": 3.178,
+      "falls": 0,
+      "combatRespawns": 2,
+      "recoveryInputs": 0,
+      "portals": 7,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 1,
+      "shieldsUsed": 1,
+      "monsters": 10,
+      "enemyTier": 100,
+      "typeIds": [
+        "E100",
+        "E050",
+        "E097",
+        "E048",
+        "E095",
+        "E049",
+        "E098",
+        "E096"
+      ],
+      "ranks": [
+        "boss",
+        "armored"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 10,
+        "roll": 25,
+        "dive": 0,
+        "attack": 279
+      },
+      "position": {
+        "x": 19.57,
+        "z": -27.18,
+        "y": 0,
+        "ground": 143
+      },
+      "pathHead": [
+        [
+          21,
+          7
+        ],
+        [
+          22,
+          7
+        ],
+        [
+          23,
+          7
+        ]
+      ]
+    },
+    {
+      "id": 1000,
+      "code": "DZ-1000",
+      "status": "won",
+      "beans": 361,
+      "score": 1011,
+      "target": 1011,
+      "totalScore": 1264,
+      "scoreMatchesCollection": true,
+      "time": 233.6,
+      "wallSeconds": 3.446,
+      "falls": 0,
+      "combatRespawns": 1,
+      "recoveryInputs": 0,
+      "portals": 8,
+      "weapon": "launcher",
+      "health": 1,
+      "shield": 1,
+      "shieldsCollected": 2,
+      "shieldsUsed": 1,
+      "monsters": 10,
+      "enemyTier": 100,
+      "typeIds": [
+        "E100",
+        "E048",
+        "E097",
+        "E049",
+        "E095",
+        "E050",
+        "E098",
+        "E096"
+      ],
+      "ranks": [
+        "boss",
+        "armored"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 18,
+        "roll": 28,
+        "dive": 0,
+        "attack": 317
+      },
+      "position": {
+        "x": 16.13,
+        "z": 40.81,
+        "y": 1.12,
+        "ground": null
+      },
+      "pathHead": [
+        [
+          20,
+          27
+        ],
+        [
+          21,
+          27
+        ],
+        [
+          22,
+          27
+        ],
+        [
+          23,
+          27
+        ]
+      ]
+    }
+  ],
+  "version": "100 catalogue enemy types (E001-E100), player shields and wind-wall fix",
+  "scope": "21 sampled maps only; this is not a new 1000-map autoplay run.",
+  "sampledLevelIds": [
+    1,
+    10,
+    11,
+    190,
+    200,
+    201,
+    390,
+    400,
+    401,
+    590,
+    600,
+    601,
+    790,
+    791,
+    800,
+    801,
+    867,
+    990,
+    991,
+    995,
+    1000
+  ],
+  "samplePolicy": "Twenty-tier behavior-family boundaries and their preceding groups, early ten-map unlock, prior route/wind regressions, and maps 990/991/995/1000.",
+  "runnerOptions": [
+    "--no-recovery"
+  ],
+  "coreSha256": {
+    "engine.js": "fecccca2aec82e039ba6d785022ccbc4b5805cdffefc8e273db04d4136a7fb07",
+    "combat.js": "045e371fa96c034e7ef64ca8c798b71e54de2f895e22817eed44f81024422a0d",
+    "enemies.js": "bcfebb1c09a1b507e851c01e71c3037f54a59ff1754274e716e419eaddd37a78",
+    "shields.js": "457e35fe06396633f60d1100aae21090ab881fd17c36961dd775bd037fa971c6",
+    "levels.js": "a15a4f4ed80d676b54dc3c66ecd8254bb81166d232edf7e884cca218c292ac37"
+  },
+  "summary": {
+    "allScoresMatch": true,
+    "attacks": 2785,
+    "defeatedMonsters": 5,
+    "falls": 0,
+    "combatRespawns": 10,
+    "shieldsCollected": 9,
+    "shieldsUsed": 7
+  },
+  "openArenaCoverage": false,
+  "geometryVersion": "Legacy maze maps before the open grass arena and giant-bean redesign",
+  "openArenaNote": "Historical evidence only. Does not verify the current open grass arena layouts, giant bean contact radii or current gameplay."
+}

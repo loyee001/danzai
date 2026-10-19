@@ -1,0 +1,470 @@
+{
+  "version": "Open grass arenas with 30-second refreshing positives, 501+ thousand-point beans and explicit combat actions",
+  "passed": 5,
+  "total": 5,
+  "sampledLevelIds": [
+    1,
+    500,
+    501,
+    910,
+    1000
+  ],
+  "frameHz": 30,
+  "wallSeconds": 0.55,
+  "sourceSha256": {
+    "levels": "3bb7bd583af0b63693199dc669bf6eba92527ce643541b449b93b20e79b150fc",
+    "engine": "b035ec576fdaa1858919836afff87dcd5f8071db1bc120a46f8fc33103c7afa1",
+    "combat": "c62fedc92933634ce03d9c85168b47e5656b275ae255d9d5d36e25726d356c5c",
+    "enemies": "bcfebb1c09a1b507e851c01e71c3037f54a59ff1754274e716e419eaddd37a78",
+    "shields": "457e35fe06396633f60d1100aae21090ab881fd17c36961dd775bd037fa971c6"
+  },
+  "coverage": "Only the listed maps were played using Game.step movement and explicit ordinary actions. No R rescue, position, score or monster state edits. Only positive beans are chosen as goals; live trap cells are avoided. Scores are checked against every actual bean-event delta, including zero resets and recollection, rather than the current collected-ID set. The engine handles physical bean-radius contact.",
+  "results": [
+    {
+      "id": 1,
+      "code": "DZ-001",
+      "arenaOpen": true,
+      "layout": "圆环草坪",
+      "status": "won",
+      "beans": 2,
+      "collectedBeans": 2,
+      "beansRemaining": 28,
+      "score": 20,
+      "target": 12,
+      "totalScore": 96,
+      "penaltyTotal": 10,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 18,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 0,
+          "score": 10
+        },
+        {
+          "id": 20,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 10,
+          "score": 20
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 6.3,
+      "wallSeconds": 0.033,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 0,
+        "dive": 0,
+        "attack": 7
+      },
+      "position": {
+        "x": 11.84,
+        "z": 34.02,
+        "y": 0,
+        "ground": 562
+      },
+      "pathHead": [
+        [
+          18,
+          25
+        ]
+      ]
+    },
+    {
+      "id": 500,
+      "code": "DZ-500",
+      "arenaOpen": true,
+      "layout": "冠军大广场",
+      "status": "won",
+      "beans": 3,
+      "collectedBeans": 3,
+      "beansRemaining": 27,
+      "score": 601,
+      "target": 511,
+      "totalScore": 676,
+      "penaltyTotal": 100,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 23,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 0,
+          "score": 1
+        },
+        {
+          "id": 17,
+          "effect": "add",
+          "value": 500,
+          "delta": 500,
+          "beforeScore": 1,
+          "score": 501
+        },
+        {
+          "id": 5,
+          "effect": "add",
+          "value": 100,
+          "delta": 100,
+          "beforeScore": 501,
+          "score": 601
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 28.8,
+      "wallSeconds": 0.133,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 7,
+      "enemyTier": 50,
+      "typeIds": [
+        "E050",
+        "E025",
+        "E047",
+        "E023",
+        "E045",
+        "E024",
+        "E048"
+      ],
+      "ranks": [
+        "armored",
+        "swift"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 5,
+        "dive": 0,
+        "attack": 95
+      },
+      "position": {
+        "x": 50.98,
+        "z": -1.89,
+        "y": 0,
+        "ground": 396
+      },
+      "pathHead": [
+        [
+          31,
+          16
+        ]
+      ]
+    },
+    {
+      "id": 501,
+      "code": "DZ-501",
+      "arenaOpen": true,
+      "layout": "圆环草坪",
+      "status": "won",
+      "beans": 2,
+      "collectedBeans": 2,
+      "beansRemaining": 28,
+      "score": 1001,
+      "target": 512,
+      "totalScore": 1675,
+      "penaltyTotal": 100,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 19,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 0,
+          "score": 1
+        },
+        {
+          "id": 6,
+          "effect": "add",
+          "value": 1000,
+          "delta": 1000,
+          "beforeScore": 1,
+          "score": 1001
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 5.5,
+      "wallSeconds": 0.019,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 0,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 7,
+      "enemyTier": 51,
+      "typeIds": [
+        "E051",
+        "E024",
+        "E047",
+        "E025",
+        "E050",
+        "E023",
+        "E048"
+      ],
+      "ranks": [
+        "armored",
+        "swift"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 10
+      },
+      "position": {
+        "x": 10.18,
+        "z": -31.61,
+        "y": 0,
+        "ground": 131
+      },
+      "pathHead": [
+        [
+          20,
+          7
+        ]
+      ]
+    },
+    {
+      "id": 910,
+      "code": "DZ-910",
+      "arenaOpen": true,
+      "layout": "冠军大广场",
+      "status": "won",
+      "beans": 2,
+      "collectedBeans": 2,
+      "beansRemaining": 116,
+      "score": 1005,
+      "target": 921,
+      "totalScore": 1993,
+      "penaltyTotal": 10,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 9,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 0,
+          "score": 5
+        },
+        {
+          "id": 33,
+          "effect": "add",
+          "value": 1000,
+          "delta": 1000,
+          "beforeScore": 5,
+          "score": 1005
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 7.4,
+      "wallSeconds": 0.065,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 10,
+      "enemyTier": 91,
+      "typeIds": [
+        "E091",
+        "E043",
+        "E088",
+        "E044",
+        "E086",
+        "E045",
+        "E089",
+        "E087"
+      ],
+      "ranks": [
+        "boss",
+        "armored"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 8
+      },
+      "position": {
+        "x": 12.59,
+        "z": 54.42,
+        "y": 0,
+        "ground": 1055
+      },
+      "pathHead": [
+        [
+          21,
+          34
+        ]
+      ]
+    },
+    {
+      "id": 1000,
+      "code": "DZ-1000",
+      "arenaOpen": true,
+      "layout": "冠军大广场",
+      "status": "won",
+      "beans": 8,
+      "collectedBeans": 8,
+      "beansRemaining": 135,
+      "score": 1019,
+      "target": 1011,
+      "totalScore": 2086,
+      "penaltyTotal": 10,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 123,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 0,
+          "score": 1
+        },
+        {
+          "id": 104,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 1,
+          "score": 2
+        },
+        {
+          "id": 86,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 2,
+          "score": 3
+        },
+        {
+          "id": 84,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 3,
+          "score": 8
+        },
+        {
+          "id": 11,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 8,
+          "score": 9
+        },
+        {
+          "id": 99,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 9,
+          "score": 14
+        },
+        {
+          "id": 51,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 14,
+          "score": 19
+        },
+        {
+          "id": 6,
+          "effect": "add",
+          "value": 1000,
+          "delta": 1000,
+          "beforeScore": 19,
+          "score": 1019
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 20.2,
+      "wallSeconds": 0.085,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 10,
+      "enemyTier": 100,
+      "typeIds": [
+        "E100",
+        "E048",
+        "E097",
+        "E049",
+        "E095",
+        "E050",
+        "E098",
+        "E096"
+      ],
+      "ranks": [
+        "boss",
+        "armored"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 4,
+        "dive": 0,
+        "attack": 37
+      },
+      "position": {
+        "x": -57.78,
+        "z": 2.39,
+        "y": 0,
+        "ground": 546
+      },
+      "pathHead": [
+        [
+          1,
+          18
+        ]
+      ]
+    }
+  ]
+}

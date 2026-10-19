@@ -1,0 +1,62 @@
+{
+  "version": "Subtract/zero bean effects with negative balances, replenishment and event-delta accounting",
+  "passed": 26,
+  "failed": 0,
+  "coverage": "6 final dangerous-bean tests plus 20 retained targeted tests. Overlap ordering checks all 6 permutations of positive/subtract/zero and both permutations without zero. Tests use real Game.step movement; falling walks off a platform, with and without a zero reset; manual R behavior uses Game.respawn. Negative balances and spent traps are preserved across pause, both portal travel and R, or natural fall/respawn. Full 1000-map data loops and enemy catalogue hit loops were not executed.",
+  "sourceSha256": {
+    "levels": "88a6b27d32b7dddc1b44ef2a131a17f6d3b095c529199283fb77c80f12b9027a",
+    "engine": "ee0e6f1d2541ae58e0fb170515a9317081e8095d857344dd31700ed2bc09c711",
+    "combat": "c62fedc92933634ce03d9c85168b47e5656b275ae255d9d5d36e25726d356c5c",
+    "enemies": "bcfebb1c09a1b507e851c01e71c3037f54a59ff1754274e716e419eaddd37a78",
+    "shields": "457e35fe06396633f60d1100aae21090ab881fd17c36961dd775bd037fa971c6",
+    "attack-input": "dcefdb6f6f89095c68a395a0c188c229099291f1e2c779f55faa4c05271f519d"
+  },
+  "groups": [
+    {
+      "group": "new dangerous-bean behaviors",
+      "passed": 6,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "durationMs": 147.481958,
+      "tests": [
+        "negative beans subtract 10 and 100, allow a negative balance and cannot trigger twice",
+        "zero clears a negative score, restores positive beans and permits collecting them again to win",
+        "pause, teleport and manual return preserve spent traps; restart restores all beans and scores",
+        "falling off a real platform preserves negative balances and spent subtract or zero beans",
+        "overlapping contacts apply positive then subtract then zero regardless of array order and never win early",
+        "a player shield cannot block negative or zero beans and is not consumed by them"
+      ]
+    },
+    {
+      "group": "retained targeted behaviors",
+      "passed": 20,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "durationMs": 564.281667,
+      "tests": [
+        "one pointer gesture fires one bubble, independent of how many simulation frames it spans",
+        "rapid distinct clicks each fire once without waiting for animation or cooldown",
+        "F and J each fire once per physical press while key repeat does not add shots",
+        "keyboard activation of the button fires once and non-primary clicks do not attack",
+        "three weapons are selectable and unknown choices leave the equipped weapon unchanged",
+        "weapon switching is immediate during attack animations and the next attack uses the new weapon",
+        "eight explicit attack actions emit eight real bubbles without waiting for animation or cooldown",
+        "positive bean values stop at 10 in map 100 and map 101 unlocks one 100 and one 500 giant bean",
+        "walking into each visible giant bean collects at its outer edge once, before reaching the center",
+        "giant bean contact also works on raised ground using its base height",
+        "1, 5 and 10 point beans accumulate independently of count; exact score wins once without duplicate points",
+        "crossing a score target wins even when no collection hits the threshold exactly",
+        "100 and 500 point beans add their full scores once and can cross the target",
+        "pause and both portal directions preserve 500-point rewards without recollecting them",
+        "falling and respawning retain score and beans; restarting resets both",
+        "portals require leaving the exit before re-entry and preserve existing score without recollection",
+        "picking up a shield schedules a 100-second refresh, pause freezes time, holding one does not consume a refreshed pickup",
+        "a shield blocks exactly one ordinary or boss contact without damage or knockback",
+        "manual return and falling clear the shield while preserving bean score; restart resets pickups",
+        "teleportation retains the equipped one-hit shield"
+      ]
+    }
+  ]
+}

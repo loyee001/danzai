@@ -1,0 +1,1362 @@
+{
+  "version": "Open grass arenas with subtract/zero beans, replenished positive beans and single-click zero-cooldown attacks",
+  "passed": 7,
+  "total": 7,
+  "sampledLevelIds": [
+    1,
+    10,
+    100,
+    101,
+    1000,
+    3,
+    8
+  ],
+  "frameHz": 30,
+  "wallSeconds": 1.14,
+  "sourceSha256": {
+    "levels": "88a6b27d32b7dddc1b44ef2a131a17f6d3b095c529199283fb77c80f12b9027a",
+    "engine": "ee0e6f1d2541ae58e0fb170515a9317081e8095d857344dd31700ed2bc09c711",
+    "combat": "c62fedc92933634ce03d9c85168b47e5656b275ae255d9d5d36e25726d356c5c",
+    "enemies": "bcfebb1c09a1b507e851c01e71c3037f54a59ff1754274e716e419eaddd37a78",
+    "shields": "457e35fe06396633f60d1100aae21090ab881fd17c36961dd775bd037fa971c6"
+  },
+  "coverage": "Only the listed maps were played using Game.step movement and explicit ordinary actions. No R rescue, position, score or monster state edits. Only positive beans are chosen as goals; live trap cells are avoided. Scores are checked against every actual bean-event delta, including zero resets and recollection, rather than the current collected-ID set. The engine handles physical bean-radius contact.",
+  "results": [
+    {
+      "id": 1,
+      "code": "DZ-001",
+      "arenaOpen": true,
+      "layout": "圆环草坪",
+      "status": "won",
+      "beans": 2,
+      "collectedBeans": 2,
+      "beansRemaining": 28,
+      "score": 20,
+      "target": 12,
+      "totalScore": 96,
+      "penaltyTotal": 10,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 18,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 0,
+          "score": 10
+        },
+        {
+          "id": 20,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 10,
+          "score": 20
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 6.3,
+      "wallSeconds": 0.032,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 0,
+        "dive": 0,
+        "attack": 7
+      },
+      "position": {
+        "x": 11.84,
+        "z": 34.02,
+        "y": 0,
+        "ground": 562
+      },
+      "pathHead": [
+        [
+          18,
+          25
+        ]
+      ]
+    },
+    {
+      "id": 10,
+      "code": "DZ-010",
+      "arenaOpen": true,
+      "layout": "冠军大广场",
+      "status": "won",
+      "beans": 3,
+      "collectedBeans": 3,
+      "beansRemaining": 28,
+      "score": 25,
+      "target": 21,
+      "totalScore": 97,
+      "penaltyTotal": 10,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 12,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 0,
+          "score": 10
+        },
+        {
+          "id": 17,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 10,
+          "score": 15
+        },
+        {
+          "id": 3,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 15,
+          "score": 25
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 13.1,
+      "wallSeconds": 0.056,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 0,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 8
+      },
+      "position": {
+        "x": -42.56,
+        "z": -0.02,
+        "y": 0,
+        "ground": 347
+      },
+      "pathHead": [
+        [
+          2,
+          15
+        ]
+      ]
+    },
+    {
+      "id": 100,
+      "code": "DZ-100",
+      "arenaOpen": true,
+      "layout": "冠军大广场",
+      "status": "won",
+      "beans": 18,
+      "collectedBeans": 18,
+      "beansRemaining": 39,
+      "score": 114,
+      "target": 111,
+      "totalScore": 191,
+      "penaltyTotal": 10,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 49,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 0,
+          "score": 10
+        },
+        {
+          "id": 47,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 10,
+          "score": 15
+        },
+        {
+          "id": 8,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 15,
+          "score": 20
+        },
+        {
+          "id": 53,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 20,
+          "score": 30
+        },
+        {
+          "id": 30,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 30,
+          "score": 40
+        },
+        {
+          "id": 33,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 40,
+          "score": 50
+        },
+        {
+          "id": 41,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 50,
+          "score": 60
+        },
+        {
+          "id": 13,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 60,
+          "score": 61
+        },
+        {
+          "id": 50,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 61,
+          "score": 66
+        },
+        {
+          "id": 27,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 66,
+          "score": 71
+        },
+        {
+          "id": 40,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 71,
+          "score": 76
+        },
+        {
+          "id": 43,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 76,
+          "score": 81
+        },
+        {
+          "id": 31,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 81,
+          "score": 82
+        },
+        {
+          "id": 9,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 82,
+          "score": 83
+        },
+        {
+          "id": 45,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 83,
+          "score": 84
+        },
+        {
+          "id": 24,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 84,
+          "score": 94
+        },
+        {
+          "id": 38,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 94,
+          "score": 104
+        },
+        {
+          "id": 35,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 104,
+          "score": 114
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 36.2,
+      "wallSeconds": 0.105,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 3,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 7,
+      "enemyTier": 10,
+      "typeIds": [
+        "E010",
+        "E003",
+        "E007",
+        "E004",
+        "E005",
+        "E008"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 3,
+      "actions": {
+        "jump": 0,
+        "roll": 6,
+        "dive": 0,
+        "attack": 71
+      },
+      "position": {
+        "x": -42.4,
+        "z": 27.18,
+        "y": 0,
+        "ground": 579
+      },
+      "pathHead": [
+        [
+          2,
+          23
+        ]
+      ]
+    },
+    {
+      "id": 101,
+      "code": "DZ-101",
+      "arenaOpen": true,
+      "layout": "圆环草坪",
+      "status": "won",
+      "beans": 1,
+      "collectedBeans": 1,
+      "beansRemaining": 29,
+      "score": 500,
+      "target": 112,
+      "totalScore": 676,
+      "penaltyTotal": 100,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 21,
+          "effect": "add",
+          "value": 500,
+          "delta": 500,
+          "beforeScore": 0,
+          "score": 500
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 13.1,
+      "wallSeconds": 0.022,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 1,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 5,
+      "enemyTier": 11,
+      "typeIds": [
+        "E011",
+        "E005",
+        "E007",
+        "E003",
+        "E010"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 2,
+      "actions": {
+        "jump": 0,
+        "roll": 3,
+        "dive": 0,
+        "attack": 47
+      },
+      "position": {
+        "x": -35.02,
+        "z": 13.59,
+        "y": 0,
+        "ground": 405
+      },
+      "pathHead": [
+        [
+          4,
+          19
+        ]
+      ]
+    },
+    {
+      "id": 1000,
+      "code": "DZ-1000",
+      "arenaOpen": true,
+      "layout": "冠军大广场",
+      "status": "won",
+      "beans": 83,
+      "collectedBeans": 83,
+      "beansRemaining": 60,
+      "score": 1013,
+      "target": 1011,
+      "totalScore": 1087,
+      "penaltyTotal": 10,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 18,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 0,
+          "score": 5
+        },
+        {
+          "id": 44,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 5,
+          "score": 6
+        },
+        {
+          "id": 26,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 6,
+          "score": 11
+        },
+        {
+          "id": 120,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 11,
+          "score": 12
+        },
+        {
+          "id": 129,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 12,
+          "score": 13
+        },
+        {
+          "id": 46,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 13,
+          "score": 14
+        },
+        {
+          "id": 96,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 14,
+          "score": 15
+        },
+        {
+          "id": 109,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 15,
+          "score": 20
+        },
+        {
+          "id": 55,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 20,
+          "score": 30
+        },
+        {
+          "id": 15,
+          "effect": "add",
+          "value": 500,
+          "delta": 500,
+          "beforeScore": 30,
+          "score": 530
+        },
+        {
+          "id": 130,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 530,
+          "score": 531
+        },
+        {
+          "id": 1,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 531,
+          "score": 536
+        },
+        {
+          "id": 17,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 536,
+          "score": 541
+        },
+        {
+          "id": 118,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 541,
+          "score": 546
+        },
+        {
+          "id": 32,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 546,
+          "score": 547
+        },
+        {
+          "id": 14,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 547,
+          "score": 548
+        },
+        {
+          "id": 8,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 548,
+          "score": 553
+        },
+        {
+          "id": 24,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 553,
+          "score": 563
+        },
+        {
+          "id": 135,
+          "effect": "add",
+          "value": 100,
+          "delta": 100,
+          "beforeScore": 563,
+          "score": 663
+        },
+        {
+          "id": 52,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 663,
+          "score": 673
+        },
+        {
+          "id": 136,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 673,
+          "score": 683
+        },
+        {
+          "id": 78,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 683,
+          "score": 693
+        },
+        {
+          "id": 68,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 693,
+          "score": 703
+        },
+        {
+          "id": 42,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 703,
+          "score": 713
+        },
+        {
+          "id": 88,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 713,
+          "score": 714
+        },
+        {
+          "id": 89,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 714,
+          "score": 724
+        },
+        {
+          "id": 126,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 724,
+          "score": 734
+        },
+        {
+          "id": 58,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 734,
+          "score": 744
+        },
+        {
+          "id": 6,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 744,
+          "score": 745
+        },
+        {
+          "id": 31,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 745,
+          "score": 755
+        },
+        {
+          "id": 51,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 755,
+          "score": 760
+        },
+        {
+          "id": 132,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 760,
+          "score": 765
+        },
+        {
+          "id": 99,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 765,
+          "score": 770
+        },
+        {
+          "id": 117,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 770,
+          "score": 775
+        },
+        {
+          "id": 10,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 775,
+          "score": 780
+        },
+        {
+          "id": 84,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 780,
+          "score": 785
+        },
+        {
+          "id": 62,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 785,
+          "score": 795
+        },
+        {
+          "id": 56,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 795,
+          "score": 805
+        },
+        {
+          "id": 43,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 805,
+          "score": 810
+        },
+        {
+          "id": 103,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 810,
+          "score": 820
+        },
+        {
+          "id": 115,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 820,
+          "score": 830
+        },
+        {
+          "id": 94,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 830,
+          "score": 840
+        },
+        {
+          "id": 25,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 840,
+          "score": 850
+        },
+        {
+          "id": 35,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 850,
+          "score": 860
+        },
+        {
+          "id": 57,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 860,
+          "score": 870
+        },
+        {
+          "id": 76,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 870,
+          "score": 875
+        },
+        {
+          "id": 41,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 875,
+          "score": 880
+        },
+        {
+          "id": 38,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 880,
+          "score": 881
+        },
+        {
+          "id": 104,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 881,
+          "score": 882
+        },
+        {
+          "id": 66,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 882,
+          "score": 887
+        },
+        {
+          "id": 33,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 887,
+          "score": 892
+        },
+        {
+          "id": 39,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 892,
+          "score": 893
+        },
+        {
+          "id": 2,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 893,
+          "score": 898
+        },
+        {
+          "id": 12,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 898,
+          "score": 899
+        },
+        {
+          "id": 125,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 899,
+          "score": 904
+        },
+        {
+          "id": 75,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 904,
+          "score": 909
+        },
+        {
+          "id": 59,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 909,
+          "score": 914
+        },
+        {
+          "id": 83,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 914,
+          "score": 919
+        },
+        {
+          "id": 47,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 919,
+          "score": 920
+        },
+        {
+          "id": 116,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 920,
+          "score": 925
+        },
+        {
+          "id": 101,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 925,
+          "score": 930
+        },
+        {
+          "id": 30,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 930,
+          "score": 931
+        },
+        {
+          "id": 77,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 931,
+          "score": 932
+        },
+        {
+          "id": 85,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 932,
+          "score": 937
+        },
+        {
+          "id": 108,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 937,
+          "score": 942
+        },
+        {
+          "id": 102,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 942,
+          "score": 943
+        },
+        {
+          "id": 74,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 943,
+          "score": 948
+        },
+        {
+          "id": 5,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 948,
+          "score": 949
+        },
+        {
+          "id": 91,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 949,
+          "score": 954
+        },
+        {
+          "id": 134,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 954,
+          "score": 959
+        },
+        {
+          "id": 100,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 959,
+          "score": 964
+        },
+        {
+          "id": 133,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 964,
+          "score": 969
+        },
+        {
+          "id": 95,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 969,
+          "score": 970
+        },
+        {
+          "id": 23,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 970,
+          "score": 980
+        },
+        {
+          "id": 67,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 980,
+          "score": 985
+        },
+        {
+          "id": 50,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 985,
+          "score": 990
+        },
+        {
+          "id": 69,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 990,
+          "score": 991
+        },
+        {
+          "id": 63,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 991,
+          "score": 992
+        },
+        {
+          "id": 124,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 992,
+          "score": 997
+        },
+        {
+          "id": 9,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 997,
+          "score": 1002
+        },
+        {
+          "id": 34,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 1002,
+          "score": 1007
+        },
+        {
+          "id": 27,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 1007,
+          "score": 1008
+        },
+        {
+          "id": 92,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 1008,
+          "score": 1013
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 155.1,
+      "wallSeconds": 0.736,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 5,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 10,
+      "enemyTier": 100,
+      "typeIds": [
+        "E100",
+        "E048",
+        "E097",
+        "E049",
+        "E095",
+        "E050",
+        "E098",
+        "E096"
+      ],
+      "ranks": [
+        "boss",
+        "armored"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 23,
+        "dive": 0,
+        "attack": 1321
+      },
+      "position": {
+        "x": -32.04,
+        "z": -6.82,
+        "y": 0,
+        "ground": 449
+      },
+      "pathHead": [
+        [
+          9,
+          16
+        ]
+      ]
+    },
+    {
+      "id": 3,
+      "code": "DZ-003",
+      "arenaOpen": true,
+      "layout": "阳光椭圆",
+      "status": "won",
+      "beans": 3,
+      "collectedBeans": 3,
+      "beansRemaining": 27,
+      "score": 16,
+      "target": 14,
+      "totalScore": 96,
+      "penaltyTotal": 10,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 5,
+          "effect": "add",
+          "value": 5,
+          "delta": 5,
+          "beforeScore": 0,
+          "score": 5
+        },
+        {
+          "id": 6,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 5,
+          "score": 6
+        },
+        {
+          "id": 11,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 6,
+          "score": 16
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 5.6,
+      "wallSeconds": 0.007,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 0,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 1,
+      "shieldsCollected": 1,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 1,
+        "dive": 0,
+        "attack": 16
+      },
+      "position": {
+        "x": 42.5,
+        "z": 0,
+        "y": 0,
+        "ground": 284
+      },
+      "pathHead": [
+        [
+          28,
+          15
+        ]
+      ]
+    },
+    {
+      "id": 8,
+      "code": "DZ-008",
+      "arenaOpen": true,
+      "layout": "风车草场",
+      "status": "won",
+      "beans": 4,
+      "collectedBeans": 4,
+      "beansRemaining": 27,
+      "score": 22,
+      "target": 19,
+      "totalScore": 97,
+      "penaltyTotal": 10,
+      "scoreMatchesEvents": true,
+      "scoreLedger": [
+        {
+          "id": 25,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 0,
+          "score": 1
+        },
+        {
+          "id": 16,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 1,
+          "score": 11
+        },
+        {
+          "id": 21,
+          "effect": "add",
+          "value": 1,
+          "delta": 1,
+          "beforeScore": 11,
+          "score": 12
+        },
+        {
+          "id": 9,
+          "effect": "add",
+          "value": 10,
+          "delta": 10,
+          "beforeScore": 12,
+          "score": 22
+        }
+      ],
+      "scoreMismatches": [],
+      "time": 16.6,
+      "wallSeconds": 0.025,
+      "falls": 0,
+      "combatRespawns": 0,
+      "recoveryInputs": 0,
+      "portals": 2,
+      "weapon": "launcher",
+      "health": 3,
+      "shield": 0,
+      "shieldsCollected": 0,
+      "shieldsUsed": 0,
+      "monsters": 3,
+      "enemyTier": 1,
+      "typeIds": [
+        "E001"
+      ],
+      "ranks": [
+        "normal"
+      ],
+      "defeatedMonsters": 1,
+      "actions": {
+        "jump": 0,
+        "roll": 4,
+        "dive": 0,
+        "attack": 21
+      },
+      "position": {
+        "x": -44.18,
+        "z": 5.16,
+        "y": 0,
+        "ground": 306
+      },
+      "pathHead": [
+        [
+          2,
+          17
+        ]
+      ]
+    }
+  ],
+  "samplePolicy": "Seven selected maps: first map, first-style cycle end, 100/101 premium boundary, final map, and two other lawn shapes. The player selects only positive goals and routes around live traps. Trap effects and replenishment are independently exercised by real-movement behavior fixtures.",
+  "summary": {
+    "falls": 0,
+    "combatRespawns": 0,
+    "recoveryInputs": 0,
+    "portals": 14,
+    "defeatedMonsters": 8,
+    "shieldsCollected": 1,
+    "shieldsUsed": 0,
+    "explicitAttackActions": 1491,
+    "scoreMatchesEvents": true,
+    "positiveBeanPickups": 114,
+    "negativeBeanPickups": 0,
+    "zeroBeanPickups": 0
+  }
+}
