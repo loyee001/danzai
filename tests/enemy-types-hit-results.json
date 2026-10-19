@@ -1,0 +1,1417 @@
+{
+  "version": "100 catalogue enemy types",
+  "passed": 100,
+  "total": 100,
+  "method": "Normal launcher actions, flight and collision events; stationary legal fixtures with an obstacle behind each target. No health, shield or position edits during shooting.",
+  "totalProjectileHits": 35199,
+  "results": [
+    {
+      "id": "E001",
+      "tier": 1,
+      "name": "泡泡团子",
+      "rank": "normal",
+      "expectedHits": 1,
+      "actualProjectileHits": 1,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E002",
+      "tier": 2,
+      "name": "薄荷软糖",
+      "rank": "normal",
+      "expectedHits": 2,
+      "actualProjectileHits": 2,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E003",
+      "tier": 3,
+      "name": "蜜桃布丁",
+      "rank": "normal",
+      "expectedHits": 3,
+      "actualProjectileHits": 3,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E004",
+      "tier": 4,
+      "name": "奶油蘑菇",
+      "rank": "normal",
+      "expectedHits": 5,
+      "actualProjectileHits": 5,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E005",
+      "tier": 5,
+      "name": "抹茶豆丁",
+      "rank": "normal",
+      "expectedHits": 6,
+      "actualProjectileHits": 6,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E006",
+      "tier": 6,
+      "name": "橘子果冻",
+      "rank": "normal",
+      "expectedHits": 8,
+      "actualProjectileHits": 8,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E007",
+      "tier": 7,
+      "name": "星星棉球",
+      "rank": "normal",
+      "expectedHits": 10,
+      "actualProjectileHits": 10,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E008",
+      "tier": 8,
+      "name": "云朵糯米",
+      "rank": "normal",
+      "expectedHits": 12,
+      "actualProjectileHits": 12,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E009",
+      "tier": 9,
+      "name": "草莓滚滚",
+      "rank": "normal",
+      "expectedHits": 15,
+      "actualProjectileHits": 15,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E010",
+      "tier": 10,
+      "name": "柠檬啾啾",
+      "rank": "normal",
+      "expectedHits": 17,
+      "actualProjectileHits": 17,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E011",
+      "tier": 11,
+      "name": "蓝莓圆仔",
+      "rank": "normal",
+      "expectedHits": 20,
+      "actualProjectileHits": 20,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E012",
+      "tier": 12,
+      "name": "芝麻绒球",
+      "rank": "normal",
+      "expectedHits": 23,
+      "actualProjectileHits": 23,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E013",
+      "tier": 13,
+      "name": "葡萄泡芙",
+      "rank": "normal",
+      "expectedHits": 26,
+      "actualProjectileHits": 26,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E014",
+      "tier": 14,
+      "name": "椰子糖球",
+      "rank": "normal",
+      "expectedHits": 30,
+      "actualProjectileHits": 30,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E015",
+      "tier": 15,
+      "name": "红豆年糕",
+      "rank": "normal",
+      "expectedHits": 33,
+      "actualProjectileHits": 33,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E016",
+      "tier": 16,
+      "name": "南瓜布偶",
+      "rank": "normal",
+      "expectedHits": 37,
+      "actualProjectileHits": 37,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E017",
+      "tier": 17,
+      "name": "樱桃软团",
+      "rank": "normal",
+      "expectedHits": 41,
+      "actualProjectileHits": 41,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E018",
+      "tier": 18,
+      "name": "可可团团",
+      "rank": "normal",
+      "expectedHits": 45,
+      "actualProjectileHits": 45,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E019",
+      "tier": 19,
+      "name": "酸奶小怪",
+      "rank": "normal",
+      "expectedHits": 49,
+      "actualProjectileHits": 49,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E020",
+      "tier": 20,
+      "name": "蜂蜜咕噜",
+      "rank": "normal",
+      "expectedHits": 53,
+      "actualProjectileHits": 53,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E021",
+      "tier": 21,
+      "name": "疾风跳豆",
+      "rank": "swift",
+      "expectedHits": 58,
+      "actualProjectileHits": 58,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E022",
+      "tier": 22,
+      "name": "闪电啾啾",
+      "rank": "swift",
+      "expectedHits": 62,
+      "actualProjectileHits": 62,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E023",
+      "tier": 23,
+      "name": "追云小翼",
+      "rank": "swift",
+      "expectedHits": 67,
+      "actualProjectileHits": 67,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E024",
+      "tier": 24,
+      "name": "旋风薄荷",
+      "rank": "swift",
+      "expectedHits": 73,
+      "actualProjectileHits": 73,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E025",
+      "tier": 25,
+      "name": "星火飞仔",
+      "rank": "swift",
+      "expectedHits": 78,
+      "actualProjectileHits": 78,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E026",
+      "tier": 26,
+      "name": "蓝电蹦蹦",
+      "rank": "swift",
+      "expectedHits": 83,
+      "actualProjectileHits": 83,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E027",
+      "tier": 27,
+      "name": "流光燕尾",
+      "rank": "swift",
+      "expectedHits": 89,
+      "actualProjectileHits": 89,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E028",
+      "tier": 28,
+      "name": "飞羽小旋",
+      "rank": "swift",
+      "expectedHits": 95,
+      "actualProjectileHits": 95,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E029",
+      "tier": 29,
+      "name": "急速柠檬",
+      "rank": "swift",
+      "expectedHits": 101,
+      "actualProjectileHits": 101,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E030",
+      "tier": 30,
+      "name": "雨燕糖豆",
+      "rank": "swift",
+      "expectedHits": 107,
+      "actualProjectileHits": 107,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E031",
+      "tier": 31,
+      "name": "霓虹飞梭",
+      "rank": "swift",
+      "expectedHits": 114,
+      "actualProjectileHits": 114,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E032",
+      "tier": 32,
+      "name": "银翼飞丸",
+      "rank": "swift",
+      "expectedHits": 120,
+      "actualProjectileHits": 120,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E033",
+      "tier": 33,
+      "name": "追月跳跳",
+      "rank": "swift",
+      "expectedHits": 127,
+      "actualProjectileHits": 127,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E034",
+      "tier": 34,
+      "name": "烈风尖耳",
+      "rank": "swift",
+      "expectedHits": 134,
+      "actualProjectileHits": 134,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E035",
+      "tier": 35,
+      "name": "旋叶灵猫",
+      "rank": "swift",
+      "expectedHits": 141,
+      "actualProjectileHits": 141,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E036",
+      "tier": 36,
+      "name": "雷鸣快爪",
+      "rank": "swift",
+      "expectedHits": 148,
+      "actualProjectileHits": 148,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E037",
+      "tier": 37,
+      "name": "幻影雨燕",
+      "rank": "swift",
+      "expectedHits": 156,
+      "actualProjectileHits": 156,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E038",
+      "tier": 38,
+      "name": "极光滑翔",
+      "rank": "swift",
+      "expectedHits": 164,
+      "actualProjectileHits": 164,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E039",
+      "tier": 39,
+      "name": "逐日流星",
+      "rank": "swift",
+      "expectedHits": 172,
+      "actualProjectileHits": 172,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E040",
+      "tier": 40,
+      "name": "疾空闪灵",
+      "rank": "swift",
+      "expectedHits": 180,
+      "actualProjectileHits": 180,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E041",
+      "tier": 41,
+      "name": "石壳豆兵",
+      "rank": "armored",
+      "expectedHits": 188,
+      "actualProjectileHits": 188,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E042",
+      "tier": 42,
+      "name": "铁甲栗子",
+      "rank": "armored",
+      "expectedHits": 196,
+      "actualProjectileHits": 196,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E043",
+      "tier": 43,
+      "name": "铜盾蘑菇",
+      "rank": "armored",
+      "expectedHits": 205,
+      "actualProjectileHits": 205,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E044",
+      "tier": 44,
+      "name": "岩盔番薯",
+      "rank": "armored",
+      "expectedHits": 214,
+      "actualProjectileHits": 214,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E045",
+      "tier": 45,
+      "name": "珊瑚堡垒",
+      "rank": "armored",
+      "expectedHits": 223,
+      "actualProjectileHits": 223,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E046",
+      "tier": 46,
+      "name": "冰晶甲虫",
+      "rank": "armored",
+      "expectedHits": 232,
+      "actualProjectileHits": 232,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E047",
+      "tier": 47,
+      "name": "黑曜石卫",
+      "rank": "armored",
+      "expectedHits": 241,
+      "actualProjectileHits": 241,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E048",
+      "tier": 48,
+      "name": "磁铁盾兵",
+      "rank": "armored",
+      "expectedHits": 251,
+      "actualProjectileHits": 251,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E049",
+      "tier": 49,
+      "name": "钢牙卫士",
+      "rank": "armored",
+      "expectedHits": 261,
+      "actualProjectileHits": 261,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E050",
+      "tier": 50,
+      "name": "翡翠重甲",
+      "rank": "armored",
+      "expectedHits": 270,
+      "actualProjectileHits": 270,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E051",
+      "tier": 51,
+      "name": "琥珀壳王",
+      "rank": "armored",
+      "expectedHits": 281,
+      "actualProjectileHits": 281,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E052",
+      "tier": 52,
+      "name": "青铜铁犀",
+      "rank": "armored",
+      "expectedHits": 291,
+      "actualProjectileHits": 291,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E053",
+      "tier": 53,
+      "name": "金砂战龟",
+      "rank": "armored",
+      "expectedHits": 301,
+      "actualProjectileHits": 301,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E054",
+      "tier": 54,
+      "name": "银甲角兽",
+      "rank": "armored",
+      "expectedHits": 312,
+      "actualProjectileHits": 312,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E055",
+      "tier": 55,
+      "name": "熔岩石偶",
+      "rank": "armored",
+      "expectedHits": 323,
+      "actualProjectileHits": 323,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E056",
+      "tier": 56,
+      "name": "陨铁守卫",
+      "rank": "armored",
+      "expectedHits": 334,
+      "actualProjectileHits": 334,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E057",
+      "tier": 57,
+      "name": "苍岩巨盾",
+      "rank": "armored",
+      "expectedHits": 345,
+      "actualProjectileHits": 345,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E058",
+      "tier": 58,
+      "name": "玄晶龙甲",
+      "rank": "armored",
+      "expectedHits": 356,
+      "actualProjectileHits": 356,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E059",
+      "tier": 59,
+      "name": "钻石铁壁",
+      "rank": "armored",
+      "expectedHits": 368,
+      "actualProjectileHits": 368,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E060",
+      "tier": 60,
+      "name": "星核重装",
+      "rank": "armored",
+      "expectedHits": 380,
+      "actualProjectileHits": 380,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E061",
+      "tier": 61,
+      "name": "赤焰先锋",
+      "rank": "elite",
+      "expectedHits": 392,
+      "actualProjectileHits": 392,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E062",
+      "tier": 62,
+      "name": "冰锋猎手",
+      "rank": "elite",
+      "expectedHits": 404,
+      "actualProjectileHits": 404,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E063",
+      "tier": 63,
+      "name": "雷霆双角",
+      "rank": "elite",
+      "expectedHits": 416,
+      "actualProjectileHits": 416,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E064",
+      "tier": 64,
+      "name": "暗影追踪",
+      "rank": "elite",
+      "expectedHits": 428,
+      "actualProjectileHits": 428,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E065",
+      "tier": 65,
+      "name": "炽光战将",
+      "rank": "elite",
+      "expectedHits": 441,
+      "actualProjectileHits": 441,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E066",
+      "tier": 66,
+      "name": "烈星破阵",
+      "rank": "elite",
+      "expectedHits": 454,
+      "actualProjectileHits": 454,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E067",
+      "tier": 67,
+      "name": "风暴掠袭",
+      "rank": "elite",
+      "expectedHits": 467,
+      "actualProjectileHits": 467,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E068",
+      "tier": 68,
+      "name": "月刃疾影",
+      "rank": "elite",
+      "expectedHits": 480,
+      "actualProjectileHits": 480,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E069",
+      "tier": 69,
+      "name": "熔火尖兵",
+      "rank": "elite",
+      "expectedHits": 494,
+      "actualProjectileHits": 494,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E070",
+      "tier": 70,
+      "name": "霜牙突袭",
+      "rank": "elite",
+      "expectedHits": 507,
+      "actualProjectileHits": 507,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E071",
+      "tier": 71,
+      "name": "雷光勇将",
+      "rank": "elite",
+      "expectedHits": 521,
+      "actualProjectileHits": 521,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E072",
+      "tier": 72,
+      "name": "晨星猎王",
+      "rank": "elite",
+      "expectedHits": 535,
+      "actualProjectileHits": 535,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E073",
+      "tier": 73,
+      "name": "暮色剑影",
+      "rank": "elite",
+      "expectedHits": 549,
+      "actualProjectileHits": 549,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E074",
+      "tier": 74,
+      "name": "飓风狂角",
+      "rank": "elite",
+      "expectedHits": 563,
+      "actualProjectileHits": 563,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E075",
+      "tier": 75,
+      "name": "赤晶斗士",
+      "rank": "elite",
+      "expectedHits": 578,
+      "actualProjectileHits": 578,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E076",
+      "tier": 76,
+      "name": "幻焰行者",
+      "rank": "elite",
+      "expectedHits": 593,
+      "actualProjectileHits": 593,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E077",
+      "tier": 77,
+      "name": "碧雷武卫",
+      "rank": "elite",
+      "expectedHits": 607,
+      "actualProjectileHits": 607,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E078",
+      "tier": 78,
+      "name": "烬火征服",
+      "rank": "elite",
+      "expectedHits": 622,
+      "actualProjectileHits": 622,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E079",
+      "tier": 79,
+      "name": "天光破军",
+      "rank": "elite",
+      "expectedHits": 638,
+      "actualProjectileHits": 638,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E080",
+      "tier": 80,
+      "name": "无极战魂",
+      "rank": "elite",
+      "expectedHits": 653,
+      "actualProjectileHits": 653,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E081",
+      "tier": 81,
+      "name": "皇冠泡泡王",
+      "rank": "boss",
+      "expectedHits": 669,
+      "actualProjectileHits": 669,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E082",
+      "tier": 82,
+      "name": "深海珊瑚王",
+      "rank": "boss",
+      "expectedHits": 684,
+      "actualProjectileHits": 684,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E083",
+      "tier": 83,
+      "name": "雪原冰牙王",
+      "rank": "boss",
+      "expectedHits": 700,
+      "actualProjectileHits": 700,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E084",
+      "tier": 84,
+      "name": "森林藤甲王",
+      "rank": "boss",
+      "expectedHits": 717,
+      "actualProjectileHits": 717,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E085",
+      "tier": 85,
+      "name": "沙海金角王",
+      "rank": "boss",
+      "expectedHits": 733,
+      "actualProjectileHits": 733,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E086",
+      "tier": 86,
+      "name": "火山熔岩王",
+      "rank": "boss",
+      "expectedHits": 749,
+      "actualProjectileHits": 749,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E087",
+      "tier": 87,
+      "name": "星夜月影王",
+      "rank": "boss",
+      "expectedHits": 766,
+      "actualProjectileHits": 766,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E088",
+      "tier": 88,
+      "name": "雷云风暴王",
+      "rank": "boss",
+      "expectedHits": 783,
+      "actualProjectileHits": 783,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E089",
+      "tier": 89,
+      "name": "水晶幻翼王",
+      "rank": "boss",
+      "expectedHits": 800,
+      "actualProjectileHits": 800,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E090",
+      "tier": 90,
+      "name": "赤日烈焰王",
+      "rank": "boss",
+      "expectedHits": 817,
+      "actualProjectileHits": 817,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E091",
+      "tier": 91,
+      "name": "苍穹巨角王",
+      "rank": "boss",
+      "expectedHits": 835,
+      "actualProjectileHits": 835,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E092",
+      "tier": 92,
+      "name": "极夜寒霜王",
+      "rank": "boss",
+      "expectedHits": 852,
+      "actualProjectileHits": 852,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E093",
+      "tier": 93,
+      "name": "虚空黑曜王",
+      "rank": "boss",
+      "expectedHits": 870,
+      "actualProjectileHits": 870,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E094",
+      "tier": 94,
+      "name": "银河流星王",
+      "rank": "boss",
+      "expectedHits": 888,
+      "actualProjectileHits": 888,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E095",
+      "tier": 95,
+      "name": "龙晶守界王",
+      "rank": "boss",
+      "expectedHits": 906,
+      "actualProjectileHits": 906,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E096",
+      "tier": 96,
+      "name": "日蚀暗星王",
+      "rank": "boss",
+      "expectedHits": 925,
+      "actualProjectileHits": 925,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E097",
+      "tier": 97,
+      "name": "天穹雷鸣王",
+      "rank": "boss",
+      "expectedHits": 943,
+      "actualProjectileHits": 943,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E098",
+      "tier": 98,
+      "name": "永夜幻梦王",
+      "rank": "boss",
+      "expectedHits": 962,
+      "actualProjectileHits": 962,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E099",
+      "tier": 99,
+      "name": "混沌万象王",
+      "rank": "boss",
+      "expectedHits": 981,
+      "actualProjectileHits": 981,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    },
+    {
+      "id": "E100",
+      "tier": 100,
+      "name": "星河终极王",
+      "rank": "boss",
+      "expectedHits": 1000,
+      "actualProjectileHits": 1000,
+      "aliveBeforeFinalHit": {
+        "hp": 1,
+        "shield": 0
+      },
+      "defeated": true,
+      "score": 0
+    }
+  ],
+  "coreSha256": {
+    "engine.js": "fecccca2aec82e039ba6d785022ccbc4b5805cdffefc8e273db04d4136a7fb07",
+    "combat.js": "045e371fa96c034e7ef64ca8c798b71e54de2f895e22817eed44f81024422a0d",
+    "enemies.js": "bcfebb1c09a1b507e851c01e71c3037f54a59ff1754274e716e419eaddd37a78",
+    "shields.js": "457e35fe06396633f60d1100aae21090ab881fd17c36961dd775bd037fa971c6",
+    "levels.js": "a15a4f4ed80d676b54dc3c66ecd8254bb81166d232edf7e884cca218c292ac37"
+  },
+  "mapGameplayCoverage": "Unit combat fixtures only; this is not open-arena map gameplay coverage."
+}

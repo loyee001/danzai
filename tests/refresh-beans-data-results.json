@@ -1,0 +1,71 @@
+{
+  "maps": 1000,
+  "existingGenerationSourceUnchanged": true,
+  "originalBeansAndTrapsHashesRestored": 1000,
+  "positiveRefreshBeans": 51804,
+  "nonRefreshingTraps": 2000,
+  "thousandMaps": 500,
+  "reachableThousands": 500,
+  "minimumThousandDistance": 34.16957711181102,
+  "minimumCenterSpacing": 6.799999999999997,
+  "minimumWalkGap": 1.739999999999997,
+  "minimumNetSurplus": 65,
+  "subtract10Maps": 535,
+  "subtract100Maps": 465,
+  "samples": [
+    {
+      "id": 1,
+      "positiveCount": 28,
+      "totalScore": 96,
+      "requiredScore": 12,
+      "penaltyTotal": 10,
+      "thousand": null
+    },
+    {
+      "id": 500,
+      "positiveCount": 28,
+      "totalScore": 676,
+      "requiredScore": 511,
+      "penaltyTotal": 100,
+      "thousand": null
+    },
+    {
+      "id": 501,
+      "positiveCount": 28,
+      "totalScore": 1675,
+      "requiredScore": 512,
+      "penaltyTotal": 100,
+      "thousand": {
+        "id": 6,
+        "x": 10.2,
+        "z": -34,
+        "y": 2.2,
+        "cx": 20,
+        "cz": 7,
+        "value": 1000,
+        "radius": 2.2,
+        "respawn": 30
+      }
+    },
+    {
+      "id": 1000,
+      "positiveCount": 141,
+      "totalScore": 2086,
+      "requiredScore": 1011,
+      "penaltyTotal": 10,
+      "thousand": {
+        "id": 6,
+        "x": -57.8,
+        "z": 0,
+        "y": 2.2,
+        "cx": 1,
+        "cz": 18,
+        "value": 1000,
+        "radius": 2.2,
+        "respawn": 30
+      }
+    }
+  ],
+  "elapsedMs": 31525,
+  "heapMiB": 12.8
+}

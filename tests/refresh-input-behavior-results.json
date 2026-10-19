@@ -1,0 +1,45 @@
+{
+  "version": "30-second refreshing beans, 501+ 1000-point beans and 0.3-second held attacks",
+  "sourceSha256": {
+    "app": "8ed2bc15e28b7a4f3a499c86e0d7c19cba08e3ff66031a6c9c79a22291f18299",
+    "engine": "b035ec576fdaa1858919836afff87dcd5f8071db1bc120a46f8fc33103c7afa1",
+    "levels": "3bb7bd583af0b63693199dc669bf6eba92527ce643541b449b93b20e79b150fc",
+    "render": "09661f1ea8d327524cc0af240f62231feca6596f132a588beec63d846fadbf8e",
+    "attack-input": "9545acc4854f0e9094a4e56bef312c6b47d96ee7b3d2553e78f3c19c8d496898"
+  },
+  "behavior": {
+    "finalInputAndRefresh": {
+      "passed": 22,
+      "failed": 0,
+      "coverage": "16 input tests including dual-touch joystick plus attack and six refresh/boundary tests"
+    },
+    "earlierIntegration": {
+      "passed": 63,
+      "failed": 0,
+      "coverage": "game, combat, shield, bean effects, refresh and input test files; final mobile input improvement independently reran all 16 input tests"
+    }
+  },
+  "autoplay": {
+    "passed": 5,
+    "total": 5,
+    "maps": [
+      1,
+      500,
+      501,
+      910,
+      1000
+    ],
+    "result": "autoplay-refresh-beans-results.json",
+    "coverage": "Actual Game.step movement; explicit attacks; no state edits or rescue inputs. Traps avoided, effects checked separately."
+  },
+  "dataAudit": "refresh-beans-data-results.json",
+  "rules": {
+    "positiveRespawnSeconds": 30,
+    "thousandPointFirstMap": 501,
+    "heldAttackIntervalSeconds": 0.3,
+    "manualClickImmediate": true,
+    "trapsRefresh": false,
+    "pauseFreezesRefresh": true,
+    "zeroRestoresPositivesImmediately": true
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "version": "Open grass arenas with giant beans and 100 enemy types",
+  "coverage": "One full generated-data audit by level_design; no gameplay simulation or auto-completion is implied. Checks cover connected lawns and beans, score surplus, unique content, 100/101 premium boundary, enemy-tier unlocking, patrol and portal safety, and a 100-second shield pickup per map.",
+  "passed": true,
+  "sourceSha256": {
+    "levels": "295939be6ee0dfc18c5504daa79289300f29bc637ca0ae99df4cb00022ea8f55",
+    "enemies": "bcfebb1c09a1b507e851c01e71c3037f54a59ff1754274e716e419eaddd37a78"
+  },
+  "maps": 1000,
+  "importMs": 4.719166999999992,
+  "platformRange": [
+    545,
+    1193
+  ],
+  "beanRange": [
+    28,
+    141
+  ],
+  "minBeanSpacing": 6.799999999999997,
+  "minSurplus": 64,
+  "allWalls": 0,
+  "reachableBeans": 51804,
+  "premiumMaps": 900,
+  "monsterCount": 7250,
+  "minPatrolSpawnDistance": 9.616652224137047,
+  "minPatrolPortalDistance": 4.808326112068522,
+  "minPatrolCheckpointDistance": 4.808326112068522,
+  "minBeanClearingGap": 0.31216836375566714,
+  "layouts": [
+    "圆环草坪",
+    "花田广场",
+    "阳光椭圆",
+    "四叶花园",
+    "八角乐园",
+    "草坡露台",
+    "彩虹野餐地",
+    "风车草场",
+    "海湾草岛",
+    "冠军大广场"
+  ],
+  "samples": [
+    {
+      "id": 1,
+      "platforms": 613,
+      "beans": 28,
+      "counts": {
+        "1": 16,
+        "5": 8,
+        "10": 4,
+        "100": 0,
+        "500": 0
+      },
+      "totalScore": 96,
+      "target": 12
+    },
+    {
+      "id": 100,
+      "platforms": 721,
+      "beans": 55,
+      "counts": {
+        "1": 31,
+        "5": 16,
+        "10": 8,
+        "100": 0,
+        "500": 0
+      },
+      "totalScore": 191,
+      "target": 111
+    },
+    {
+      "id": 101,
+      "platforms": 613,
+      "beans": 28,
+      "counts": {
+        "1": 16,
+        "5": 8,
+        "10": 2,
+        "100": 1,
+        "500": 1
+      },
+      "totalScore": 676,
+      "target": 112
+    },
+    {
+      "id": 1000,
+      "platforms": 1057,
+      "beans": 141,
+      "counts": {
+        "1": 77,
+        "5": 42,
+        "10": 20,
+        "100": 1,
+        "500": 1
+      },
+      "totalScore": 1087,
+      "target": 1011
+    }
+  ],
+  "uniqueCodes": 1000,
+  "uniquePlacements": 1000,
+  "enemyTiers": 100,
+  "elapsedMs": 27837,
+  "heapMiB": 12.6,
+  "trapBeanCoverage": false,
+  "ruleVersion": "Open arena baseline before subtract/zero beans and positive bean replenishment"
+}

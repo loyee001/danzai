@@ -1,0 +1,149 @@
+{
+  "version": "Open grass arenas with subtract/zero beans and replenished positive beans",
+  "passed": true,
+  "coverage": "One generated-data audit by level_design across all 1000 maps. Checks confirm appended traps without replacing previous positives, remaining positive capacity after all subtract beans, safe reachable trap spacing, and preservation of existing geometry. No full gameplay completion is implied.",
+  "sourceSha256": {
+    "levels": "88a6b27d32b7dddc1b44ef2a131a17f6d3b095c529199283fb77c80f12b9027a",
+    "enemies": "bcfebb1c09a1b507e851c01e71c3037f54a59ff1754274e716e419eaddd37a78"
+  },
+  "maps": 1000,
+  "positiveHashesUnchanged": 1000,
+  "existingGenerationSourceUnchanged": true,
+  "subtract10Maps": 535,
+  "subtract100Maps": 465,
+  "zeroBeans": 1000,
+  "minNetSurplus": 0,
+  "minTrapBeanSpacing": 6.799999999999997,
+  "minSpawnDistance": 12.258874336577563,
+  "minPortalDistance": 6.799999999999997,
+  "minCheckpointDistance": 7.6026311234992825,
+  "minShieldDistance": 9.616652224137045,
+  "minMechanicDistance": 6.799999999999997,
+  "minCorridorDistance": 9.616652224137047,
+  "minLandmarkGap": 2.130787074201268,
+  "latticeTraps": 2000,
+  "samples": [
+    {
+      "id": 1,
+      "target": 12,
+      "totalScore": 96,
+      "penaltyTotal": 10,
+      "traps": [
+        {
+          "id": 28,
+          "x": 10.2,
+          "z": 13.6,
+          "y": 1.25,
+          "cx": 18,
+          "cz": 19,
+          "effect": "subtract",
+          "value": -10,
+          "radius": 1.25
+        },
+        {
+          "id": 29,
+          "x": 23.8,
+          "z": 20.4,
+          "y": 1.45,
+          "cx": 22,
+          "cz": 21,
+          "effect": "zero",
+          "value": 0,
+          "radius": 1.45
+        }
+      ]
+    },
+    {
+      "id": 100,
+      "target": 111,
+      "totalScore": 191,
+      "penaltyTotal": 10,
+      "traps": [
+        {
+          "id": 55,
+          "x": 10.2,
+          "z": 20.4,
+          "y": 1.25,
+          "cx": 18,
+          "cz": 21,
+          "effect": "subtract",
+          "value": -10,
+          "radius": 1.25
+        },
+        {
+          "id": 56,
+          "x": 23.8,
+          "z": 20.4,
+          "y": 1.45,
+          "cx": 22,
+          "cz": 21,
+          "effect": "zero",
+          "value": 0,
+          "radius": 1.45
+        }
+      ]
+    },
+    {
+      "id": 101,
+      "target": 112,
+      "totalScore": 676,
+      "penaltyTotal": 100,
+      "traps": [
+        {
+          "id": 28,
+          "x": 17,
+          "z": 20.4,
+          "y": 1.7,
+          "cx": 20,
+          "cz": 21,
+          "effect": "subtract",
+          "value": -100,
+          "radius": 1.7
+        },
+        {
+          "id": 29,
+          "x": 30.599999999999998,
+          "z": 20.4,
+          "y": 1.45,
+          "cx": 24,
+          "cz": 21,
+          "effect": "zero",
+          "value": 0,
+          "radius": 1.45
+        }
+      ]
+    },
+    {
+      "id": 1000,
+      "target": 1011,
+      "totalScore": 1087,
+      "penaltyTotal": 10,
+      "traps": [
+        {
+          "id": 141,
+          "x": 10.2,
+          "z": 20.4,
+          "y": 1.25,
+          "cx": 21,
+          "cz": 24,
+          "effect": "subtract",
+          "value": -10,
+          "radius": 1.25
+        },
+        {
+          "id": 142,
+          "x": 23.8,
+          "z": 27.2,
+          "y": 1.45,
+          "cx": 25,
+          "cz": 26,
+          "effect": "zero",
+          "value": 0,
+          "radius": 1.45
+        }
+      ]
+    }
+  ],
+  "elapsedMs": 31264,
+  "heapMiB": 12.6
+}
