@@ -25,10 +25,12 @@ test('fish attacks do not penetrate walls, closed gates or placed boxes',()=>{
  const cases=[
   {level:{walls:[{x:1.4,z:0,w:.3,d:6,h:3}],hazards:[]}},
   {level:{walls:[],hazards:[{type:'gate',x:1.4,z:0,y:0,w:6,axis:'x',phase:0,speed:0}]}},
-  {gadgets:{crates:[{id:'crate-1',x:1.7,z:0,y:0,w:2,d:2,h:1.25}]}}
+  {gadgets:{crates:[{id:'crate-1',x:1.7,z:0,y:0,w:2,d:2,h:1.25}]}},
+  {level:{walls:[],hazards:[],platforms:[{id:8,type:'airCrate',x:1.7,z:0,y:1.25,baseY:0,w:2,d:2,h:1.25}]}}
  ];
  for(const spec of cases){const game=fixture([enemy(0,3)],spec);assert.equal(fishStrike(game),true);assert.equal(game.monsters[0].hp,998);assert.equal(game.monsters[0].shieldHP,2);assert.equal(game.defeatedMonsters,0);assert.equal(game.events.length,1,'only the empty swing is emitted');}
  const above=fixture([enemy(0,3)],{gadgets:{crates:[{id:'raised',x:1.7,z:0,y:3,w:2,d:2,h:1.25}]}});assert(fishStrike(above));assert.equal(above.monsters[0].defeated,true,'a box well above the strike cannot block it');
+ const under=fixture([enemy(0,3)],{level:{walls:[],hazards:[],platforms:[{id:8,type:'airCrate',x:1.7,z:0,y:4.25,baseY:3,w:2,d:2,h:1.25}]}});assert(fishStrike(under));assert.equal(under.monsters[0].defeated,true,'a floating crate only blocks attacks through its actual body');
 });
 
 test('an empty fish swing succeeds, a defeated player cannot swing and zero direction has a forward fallback',()=>{

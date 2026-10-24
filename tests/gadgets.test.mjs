@@ -107,8 +107,8 @@ test('a player standing on the crate top is above a nearby ground monster contac
  assert.equal(g.player.ground,box.id);assert.equal(g.player.y,1.25);assert(Math.hypot(g.player.x-g.monsters[0].x,g.player.z-g.monsters[0].z)<1.03);assert.equal(g.player.invuln,0);assert.equal(g.player.health,3);assert(!g.events.some(e=>e.type==='damage'));
 });
 
-test('crate placement rejects air, walls, lava and unsupported footprints without spending, but spans grass seams',()=>{
- const air=start();air.action('jump');tick(air,.1);assert.equal(air.action('crate'),false);assert.equal(air.gadgets.inventory.crate,3);
+test('crate placement accepts airborne support and rejects walls, lava and unsupported ground footprints',()=>{
+ const air=start();air.action('jump');tick(air,.2);assert.equal(air.action('crate'),true);assert.equal(air.gadgets.inventory.crate,2);assert.equal(air.player.ground,air.gadgets.crates[0].id);
  const cases=[
   {walls:[{x:0,z:1,w:80,d:.4,h:4}]},
   {lavaZones:[{id:'no-box',x:0,z:3,y:0,w:12,d:4}]},

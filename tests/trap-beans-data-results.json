@@ -1,55 +1,73 @@
 {
-  "version": "Open grass arenas with subtract/zero beans and replenished positive beans",
-  "passed": true,
-  "coverage": "One generated-data audit by level_design across all 1000 maps. Checks confirm appended traps without replacing previous positives, remaining positive capacity after all subtract beans, safe reachable trap spacing, and preservation of existing geometry. No full gameplay completion is implied.",
-  "sourceSha256": {
-    "levels": "88a6b27d32b7dddc1b44ef2a131a17f6d3b095c529199283fb77c80f12b9027a",
-    "enemies": "bcfebb1c09a1b507e851c01e71c3037f54a59ff1754274e716e419eaddd37a78"
-  },
+  "version": "Progressive grass-map trap beans",
   "maps": 1000,
-  "positiveHashesUnchanged": 1000,
-  "existingGenerationSourceUnchanged": true,
-  "subtract10Maps": 535,
-  "subtract100Maps": 465,
-  "zeroBeans": 1000,
-  "minNetSurplus": 0,
-  "minTrapBeanSpacing": 6.799999999999997,
-  "minSpawnDistance": 12.258874336577563,
-  "minPortalDistance": 6.799999999999997,
-  "minCheckpointDistance": 7.6026311234992825,
-  "minShieldDistance": 9.616652224137045,
-  "minMechanicDistance": 6.799999999999997,
-  "minCorridorDistance": 9.616652224137047,
-  "minLandmarkGap": 2.130787074201268,
-  "latticeTraps": 2000,
+  "coverage": "Generated-data audit only. All 1000 maps retain their original positive bean objects, positive capacity, target scores and geometry. Each trap has a full clear grass ring, safe bean spacing, reachable ground, and protected portals, shields and world gadget pickup circles. Separate Game.step contact tests cover new subtract and zero beans; no 1000-map autoplay or enemy hit-count sweep was run.",
+  "rules": [
+    {
+      "from": 1,
+      "to": 300,
+      "negative": 2
+    },
+    {
+      "from": 301,
+      "to": 600,
+      "negative": 3
+    },
+    {
+      "from": 601,
+      "to": 1000,
+      "negative": 4
+    },
+    {
+      "from": 1,
+      "to": 500,
+      "zero": 1
+    },
+    {
+      "from": 501,
+      "to": 1000,
+      "zero": 2
+    }
+  ],
+  "counts": {
+    "negative10": 380,
+    "negative100": 2720,
+    "zero": 1500
+  },
+  "minScoreMargin": 0,
+  "minToolClearance": 1.6783261120685233,
+  "positiveDigest": "c63b853fe9d066766ff7cba01ee4342f6d145466d187a9b1e7845a6d53bd9af8",
+  "geometryDigest": "43bcafd3f5e600ef304387cb341b58f8c530f815999b793bb3d21d7e762b8fb6",
   "samples": [
     {
       "id": 1,
       "target": 12,
       "totalScore": 96,
-      "penaltyTotal": 10,
+      "penaltyTotal": 20,
+      "negativeBeans": 2,
+      "zeroBeans": 1,
       "traps": [
         {
           "id": 28,
           "x": 10.2,
           "z": 13.6,
-          "y": 1.25,
-          "cx": 18,
-          "cz": 19,
-          "effect": "subtract",
           "value": -10,
-          "radius": 1.25
+          "effect": "subtract"
+        },
+        {
+          "id": 30,
+          "x": 17,
+          "z": -27.2,
+          "value": -10,
+          "effect": "subtract",
+          "baitId": 25
         },
         {
           "id": 29,
           "x": 23.8,
           "z": 20.4,
-          "y": 1.45,
-          "cx": 22,
-          "cz": 21,
-          "effect": "zero",
           "value": 0,
-          "radius": 1.45
+          "effect": "zero"
         }
       ]
     },
@@ -57,29 +75,31 @@
       "id": 100,
       "target": 111,
       "totalScore": 191,
-      "penaltyTotal": 10,
+      "penaltyTotal": 20,
+      "negativeBeans": 2,
+      "zeroBeans": 1,
       "traps": [
         {
           "id": 55,
           "x": 10.2,
           "z": 20.4,
-          "y": 1.25,
-          "cx": 18,
-          "cz": 21,
-          "effect": "subtract",
           "value": -10,
-          "radius": 1.25
+          "effect": "subtract"
+        },
+        {
+          "id": 57,
+          "x": -37.4,
+          "z": -34,
+          "value": -10,
+          "effect": "subtract",
+          "baitId": 33
         },
         {
           "id": 56,
           "x": 23.8,
           "z": 20.4,
-          "y": 1.45,
-          "cx": 22,
-          "cz": 21,
-          "effect": "zero",
           "value": 0,
-          "radius": 1.45
+          "effect": "zero"
         }
       ]
     },
@@ -87,63 +107,353 @@
       "id": 101,
       "target": 112,
       "totalScore": 676,
-      "penaltyTotal": 100,
+      "penaltyTotal": 200,
+      "negativeBeans": 2,
+      "zeroBeans": 1,
       "traps": [
         {
           "id": 28,
           "x": 17,
           "z": 20.4,
-          "y": 1.7,
-          "cx": 20,
-          "cz": 21,
-          "effect": "subtract",
           "value": -100,
-          "radius": 1.7
+          "effect": "subtract"
+        },
+        {
+          "id": 30,
+          "x": -37.4,
+          "z": 6.8,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 21
         },
         {
           "id": 29,
           "x": 30.599999999999998,
           "z": 20.4,
-          "y": 1.45,
-          "cx": 24,
-          "cz": 21,
-          "effect": "zero",
           "value": 0,
-          "radius": 1.45
+          "effect": "zero"
+        }
+      ]
+    },
+    {
+      "id": 300,
+      "target": 311,
+      "totalScore": 676,
+      "penaltyTotal": 200,
+      "negativeBeans": 2,
+      "zeroBeans": 1,
+      "traps": [
+        {
+          "id": 28,
+          "x": 23.8,
+          "z": 13.6,
+          "value": -100,
+          "effect": "subtract"
+        },
+        {
+          "id": 30,
+          "x": -44.199999999999996,
+          "z": -34,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 10
+        },
+        {
+          "id": 29,
+          "x": 23.8,
+          "z": 27.2,
+          "value": 0,
+          "effect": "zero"
+        }
+      ]
+    },
+    {
+      "id": 301,
+      "target": 312,
+      "totalScore": 676,
+      "penaltyTotal": 300,
+      "negativeBeans": 3,
+      "zeroBeans": 1,
+      "traps": [
+        {
+          "id": 28,
+          "x": 10.2,
+          "z": 20.4,
+          "value": -100,
+          "effect": "subtract"
+        },
+        {
+          "id": 30,
+          "x": -37.4,
+          "z": 27.2,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 25
+        },
+        {
+          "id": 31,
+          "x": 10.2,
+          "z": 34,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 23
+        },
+        {
+          "id": 29,
+          "x": 23.8,
+          "z": 20.4,
+          "value": 0,
+          "effect": "zero"
+        }
+      ]
+    },
+    {
+      "id": 500,
+      "target": 511,
+      "totalScore": 676,
+      "penaltyTotal": 120,
+      "negativeBeans": 3,
+      "zeroBeans": 1,
+      "traps": [
+        {
+          "id": 28,
+          "x": 17,
+          "z": 13.6,
+          "value": -100,
+          "effect": "subtract"
+        },
+        {
+          "id": 30,
+          "x": -44.199999999999996,
+          "z": 6.8,
+          "value": -10,
+          "effect": "subtract",
+          "baitId": 17
+        },
+        {
+          "id": 31,
+          "x": 44.199999999999996,
+          "z": 0,
+          "value": -10,
+          "effect": "subtract",
+          "baitId": 5
+        },
+        {
+          "id": 29,
+          "x": 23.8,
+          "z": 20.4,
+          "value": 0,
+          "effect": "zero"
+        }
+      ]
+    },
+    {
+      "id": 501,
+      "target": 512,
+      "totalScore": 1675,
+      "penaltyTotal": 300,
+      "negativeBeans": 3,
+      "zeroBeans": 2,
+      "traps": [
+        {
+          "id": 28,
+          "x": 17,
+          "z": 20.4,
+          "value": -100,
+          "effect": "subtract"
+        },
+        {
+          "id": 30,
+          "x": 3.4,
+          "z": -34,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 6
+        },
+        {
+          "id": 31,
+          "x": -3.4,
+          "z": 40.8,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 21
+        },
+        {
+          "id": 29,
+          "x": 23.8,
+          "z": 27.2,
+          "value": 0,
+          "effect": "zero"
+        },
+        {
+          "id": 32,
+          "x": 17,
+          "z": -40.8,
+          "value": 0,
+          "effect": "zero",
+          "baitId": 9
+        }
+      ]
+    },
+    {
+      "id": 600,
+      "target": 611,
+      "totalScore": 1675,
+      "penaltyTotal": 300,
+      "negativeBeans": 3,
+      "zeroBeans": 2,
+      "traps": [
+        {
+          "id": 28,
+          "x": 17,
+          "z": 20.4,
+          "value": -100,
+          "effect": "subtract"
+        },
+        {
+          "id": 30,
+          "x": 37.4,
+          "z": 20.4,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 15
+        },
+        {
+          "id": 31,
+          "x": -51,
+          "z": 34,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 21
+        },
+        {
+          "id": 29,
+          "x": 23.8,
+          "z": 27.2,
+          "value": 0,
+          "effect": "zero"
+        },
+        {
+          "id": 32,
+          "x": 44.199999999999996,
+          "z": 34,
+          "value": 0,
+          "effect": "zero",
+          "baitId": 22
+        }
+      ]
+    },
+    {
+      "id": 601,
+      "target": 612,
+      "totalScore": 1684,
+      "penaltyTotal": 400,
+      "negativeBeans": 4,
+      "zeroBeans": 2,
+      "traps": [
+        {
+          "id": 28,
+          "x": 10.2,
+          "z": 20.4,
+          "value": -100,
+          "effect": "subtract"
+        },
+        {
+          "id": 30,
+          "x": 3.4,
+          "z": -27.2,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 27
+        },
+        {
+          "id": 31,
+          "x": -3.4,
+          "z": -40.8,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 18
+        },
+        {
+          "id": 32,
+          "x": -30.599999999999998,
+          "z": 6.8,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 2
+        },
+        {
+          "id": 29,
+          "x": 30.599999999999998,
+          "z": 20.4,
+          "value": 0,
+          "effect": "zero"
+        },
+        {
+          "id": 33,
+          "x": 23.8,
+          "z": -34,
+          "value": 0,
+          "effect": "zero",
+          "baitId": 11
         }
       ]
     },
     {
       "id": 1000,
       "target": 1011,
-      "totalScore": 1087,
-      "penaltyTotal": 10,
+      "totalScore": 2086,
+      "penaltyTotal": 400,
+      "negativeBeans": 4,
+      "zeroBeans": 2,
       "traps": [
         {
           "id": 141,
           "x": 10.2,
           "z": 20.4,
-          "y": 1.25,
-          "cx": 21,
-          "cz": 24,
+          "value": -100,
+          "effect": "subtract"
+        },
+        {
+          "id": 143,
+          "x": -51,
+          "z": 13.6,
+          "value": -100,
           "effect": "subtract",
-          "value": -10,
-          "radius": 1.25
+          "baitId": 126
+        },
+        {
+          "id": 144,
+          "x": -51,
+          "z": -40.8,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 15
+        },
+        {
+          "id": 145,
+          "x": 51,
+          "z": -27.2,
+          "value": -100,
+          "effect": "subtract",
+          "baitId": 135
         },
         {
           "id": 142,
           "x": 23.8,
           "z": 27.2,
-          "y": 1.45,
-          "cx": 25,
-          "cz": 26,
-          "effect": "zero",
           "value": 0,
-          "radius": 1.45
+          "effect": "zero"
+        },
+        {
+          "id": 146,
+          "x": 44.199999999999996,
+          "z": -27.2,
+          "value": 0,
+          "effect": "zero",
+          "baitId": 2
         }
       ]
     }
-  ],
-  "elapsedMs": 31264,
-  "heapMiB": 12.6
+  ]
 }
