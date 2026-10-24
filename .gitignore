@@ -9,3 +9,5 @@ node_modules/
 .openai/
 backups/
 preview.jpg
+artifacts/
+__pycache__/
