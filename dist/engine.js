@@ -1,11 +1,17 @@
 import {initShields,refreshShields,collectShield} from './shields.js';
 import {WEAPONS,initCombat,setWeapon,attack,updateCombat} from './combat.js';
 import {CHALLENGES,makeChallenge,withChallengePortals} from './challenges.js';
-import {initGadgets,gadgetAction,stepGadgets,resetGadgetEffects,snapshotGadgets,cratePlatforms,collectGadgetPickups,replenishGadgetPickups} from './gadgets.js';
+import {initGadgets,gadgetAction,stepGadgets,resetGadgetEffects,snapshotGadgets,cratePlatforms,solidCrates,collectGadgetPickups,replenishGadgetPickups,spawnCompletionReward,restoreCompletionRewards,snapshotCompletionReward} from './gadgets.js';
 export {WEAPONS};
 export const PHYSICS={walk:7.5,roll:14,jump:10.5,gravity:25,rollDuration:.85,rollCooldown:2.8,diveDuration:.3,diveCooldown:1.35,radius:.43};
+export const COLLAPSE_TIMING=Object.freeze({warning:3,fall:5,recover:9});
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const approach=(v,target,delta)=>v<target?Math.min(v+delta,target):Math.max(v-delta,target);
+export function collapsePhase(game,platform,t=game.time){
+ const began=game.collapse?.get(platform.id),age=began===undefined?0:Math.max(0,t-began),active=began!==undefined&&age<COLLAPSE_TIMING.recover-1e-9;
+ const phase=!active?'idle':age<COLLAPSE_TIMING.warning-1e-9?'warning':age<COLLAPSE_TIMING.fall-1e-9?'danger':'gone';
+ return {age,phase,progress:active?clamp(age/COLLAPSE_TIMING.warning,0,1):0,remaining:active?Math.max(0,COLLAPSE_TIMING.fall-age):COLLAPSE_TIMING.fall,recoveryRemaining:phase==='gone'?Math.max(0,COLLAPSE_TIMING.recover-age):0,visible:phase!=='gone'};
+}
 export function beanEffect(bean){return bean.effect==='zero'?'zero':bean.effect==='subtract'||bean.value<0?'subtract':'add';}
 export function beanContact(player,bean){
  if(bean.radius>0){
@@ -18,10 +24,12 @@ export function platformPose(p,t){return {x:p.x+(p.type==='moving'?Math.sin(t*p.
 export function hazardPose(h,t){const q=t*h.speed+h.phase;return {x:h.x+(h.type==='pendulum'?Math.sin(q*1.8)*h.range:h.type==='bumper'?Math.sin(q)*h.range*.65:0),z:h.z,y:h.y,angle:q,open:h.type==='gate'&&Math.sin(q*1.6)>.15,extension:h.type==='pusher'?(Math.sin(q*1.5)+1)*.5:0};}
 export class Game {
  constructor(level){this.load(level);}
- load(level,{preserveChallenge=false}={}){if(!preserveChallenge){delete this._arenaState;this._gadgetPickupStates=new Map();this._resetState={remaining:0};}level=withChallengePortals(level);this.level=level;this.time=0;this.elapsed=0;this.status='ready';this.falls=0;this.collected=new Set();this.beanRespawns=new Map();this.beanPickups=0;this.score=0;this.switches=new Set();this.collapse=new Map();this.events=[];this.checkpoint={...level.spawn};this.checkpointId=level.spawnPlatform??0;this.respawnDelay=0;this.portalLock=null;this._challengeEntryLock=null;this.portalUses=0;this.lastGateTip=undefined;this.actionCounts={jump:0,roll:0,dive:0,attack:0};this.player={x:0,z:0,y:0,vx:0,vz:0,vy:0,faceX:0,faceZ:1,ground:0,coyote:.1,roll:0,rollCd:0,dive:0,diveCd:0,airDive:false,invuln:0,jumpBuffer:0,portalCd:0};initCombat(this,level);initShields(this,level);initGadgets(this,level);if(preserveChallenge&&this._arenaState?.state.gadgets)this.gadgets.inventory=this._arenaState.state.gadgets.inventory;this.respawn(true);}
+ load(level,{preserveChallenge=false}={}){if(!preserveChallenge){delete this._arenaState;this._gadgetPickupStates=new Map();this._resetState={remaining:0};}level=withChallengePortals(level);this.level=level;this.time=0;this.elapsed=0;this.status='ready';this.hasCompleted=false;this.completedElapsed=null;this.falls=0;this.collected=new Set();this.beanRespawns=new Map();this.beanPickups=0;this.score=0;this.switches=new Set();this.collapse=new Map();this.events=[];this.checkpoint={...level.spawn};this.checkpointId=level.spawnPlatform??0;this.respawnDelay=0;this.portalLock=null;this._challengeEntryLock=null;this.portalUses=0;this.lastGateTip=undefined;this.actionCounts={jump:0,roll:0,dive:0,attack:0};this.player={x:0,z:0,y:0,vx:0,vz:0,vy:0,faceX:0,faceZ:1,ground:0,coyote:.1,roll:0,rollCd:0,dive:0,diveCd:0,airDive:false,invuln:0,jumpBuffer:0,portalCd:0};initCombat(this,level);initShields(this,level);initGadgets(this,level);if(preserveChallenge&&this._arenaState?.state.gadgets)this.gadgets.inventory=this._arenaState.state.gadgets.inventory;this.respawn(true);if(!preserveChallenge)restoreCompletionRewards(this);}
  emit(type,data={}){this.events.push({type,...data});}
  start(){if(this.status==='ready'||this.status==='paused')this.status='playing';}
  pause(){if(this.status==='playing')this.status='paused';}
+ get lastCompletionReward(){return snapshotCompletionReward(this);}
+ continueAfterWin(){if(this.status!=='won'||!this.hasCompleted)return false;this.status='playing';return true;}
  get resetCooldown(){return this._resetState?.remaining??0;}
  requestReset(){if(this.status!=='playing'||this.respawnDelay||this.resetCooldown>1e-9)return false;this.respawn();this._resetState.remaining=10;this.emit('reset',{cooldown:10});return true;}
  replenishGadgetPickups(){return replenishGadgetPickups(this);}
@@ -48,7 +56,8 @@ export class Game {
   if(!this._arenaState)return false;
   const session=this._arenaState,challenge=this.level.challenge,pending=this.events;resetGadgetEffects(this);
   for(const key of Object.keys(this))delete this[key];Object.assign(this,session.state);this.events=pending;
-  this.emit('challengeExit',{challengeId:challenge.id,name:challenge.name,completed});return true;
+  const reward=completed?spawnCompletionReward(this,{source:'challenge',sourceId:challenge.id}):null;
+  this.emit('challengeExit',{challengeId:challenge.id,name:challenge.name,completed,...(reward?{reward}:{})});return true;
  }
  retryChallenge(){
   if(!this._arenaState)return false;
@@ -75,10 +84,11 @@ export class Game {
   if(ids.length)this.emit('beanReady',{ids});
  }
  platforms(){return this.gadgets?.crates?.length?[...this.level.platforms,...cratePlatforms(this)]:this.level.platforms;}
- surface(p,t=this.time){if(p.type==='bridge'&&!this.switches.has(p.switchId))return false;const c=this.collapse.get(p.id);return !(c!==undefined&&t-c>.85&&t-c<4.5);}
+ surface(p,t=this.time){if(p.type==='bridge'&&!this.switches.has(p.switchId))return false;return collapsePhase(this,p,t).visible;}
  step(dt,input={x:0,z:0}){if(this.status!=='playing')return;dt=Math.min(dt,1/30);this.time+=dt;this.elapsed+=dt;this._resetState.remaining=Math.max(0,this.resetCooldown-dt);refreshShields(this);this.refreshBeans();const p=this.player;
   if(this.respawnDelay){this.respawnDelay-=dt;p.y-=dt*9;if(this.respawnDelay<=0)this.respawn();return;}
   for(const k of ['roll','rollCd','dive','diveCd','invuln','jumpBuffer','portalCd','attack','attackCd'])p[k]=Math.max(0,p[k]-dt);
+  for(const [id,t]of this.collapse)if(this.time-t>=COLLAPSE_TIMING.recover-1e-9)this.collapse.delete(id);
   const platforms=this.platforms();
   let support=platforms.find(q=>q.id===p.ground);
   if(support&&!this.surface(support)){p.ground=null;support=null;}
@@ -104,7 +114,7 @@ export class Game {
   let landing=null;
   for(const q of platforms){if(!this.surface(q))continue;const pos=platformPose(q,this.time),inside=Math.abs(p.x-pos.x)<q.w/2+.12&&Math.abs(p.z-pos.z)<q.d/2+.12;
     if(inside&&p.vy<=0&&old.y>=q.y-.06&&p.y<=q.y){if(!landing||q.y>landing.y)landing=q;}
-    else if(q.type!=='crate'&&inside&&p.y<q.y-.2&&p.y>q.y-1.5&&old.y<q.y-.1){p.x=old.x;p.z=old.z;p.vx*=.2;p.vz*=.2;}
+    else if(!['crate','airCrate'].includes(q.type)&&inside&&p.y<q.y-.2&&p.y>q.y-1.5&&old.y<q.y-.1){p.x=old.x;p.z=old.z;p.vx*=.2;p.vz*=.2;}
   }
   if(landing){p.y=landing.y;p.vy=0;p.ground=landing.id;p.airDive=false;p.coyote=.11;
    if(landing.type==='collapse'&&!this.collapse.has(landing.id)){this.collapse.set(landing.id,this.time);this.emit('crack');}
@@ -112,7 +122,6 @@ export class Game {
    if(landing.type==='bounce'&&Math.abs(p.x-landing.x)<1.6&&Math.abs(p.z-landing.z)<1.5){p.vy=14;p.ground=null;p.coyote=0;this.emit('bounce');}
    if(landing.checkpoint&&landing.id!==this.checkpointId&&landing.type!=='finish'){this.checkpointId=landing.id;this.checkpoint={x:landing.x,z:landing.z,y:landing.y};this.emit('checkpoint');}
   }
-  for(const [id,t]of this.collapse){if(this.time-t>4.5)this.collapse.delete(id);}
   for(const h of this.level.hazards){const q=hazardPose(h,this.time);let hit=false;let nx=0,nz=0;
    if(h.type==='sweeper'&&p.y<h.y+1.12&&p.y>h.y-.7){const dx=p.x-h.x,dz=p.z-h.z,along=dx*Math.cos(q.angle)+dz*Math.sin(q.angle),across=-dx*Math.sin(q.angle)+dz*Math.cos(q.angle);hit=Math.abs(along)<h.w/2+.35&&Math.abs(across)<.63;nx=-Math.sin(q.angle)*Math.sign(across||1);nz=Math.cos(q.angle)*Math.sign(across||1);}
    if(['bumper','pendulum'].includes(h.type)&&p.y<h.y+(h.type==='pendulum'?2.5:1.8)&&p.y>h.y-.8){const dx=p.x-q.x,dz=p.z-q.z,d=Math.hypot(dx,dz);hit=d<h.radius+.48;nx=dx/(d||1);nz=dz/(d||1);}
@@ -140,7 +149,7 @@ export class Game {
    this.emit('bean',{id:bean.id,effect,value,delta:this.score-beforeScore,beforeScore,score:this.score,...(effect==='zero'?{resetPositiveBeans}:{})});
   }
   const b=this.level.bounds;if(p.y<-7||(b&&(p.x<b.minX-3||p.x>b.maxX+3||p.z<b.minZ-3||p.z>b.maxZ+3)))this.fail();
-  if(this.level.mode!=='challenge'&&this.score>=this.level.requiredScore){this.status='won';this.emit('win');}
+  if(this.level.mode!=='challenge'&&!this.hasCompleted&&this.score>=this.level.requiredScore){this.hasCompleted=true;this.completedElapsed=this.elapsed;this.status='won';const reward=spawnCompletionReward(this,{source:'arena'});this.emit('win',{time:this.completedElapsed,reward});}
  }
  collideWalls(old){const p=this.player,r=PHYSICS.radius;
   for(const w of this.level.walls||[]){if(p.y>=w.h||p.y<-2)continue;const minX=w.x-w.w/2-r,maxX=w.x+w.w/2+r,minZ=w.z-w.d/2-r,maxZ=w.z+w.d/2+r;
@@ -150,7 +159,7 @@ export class Game {
  }
  collideCrates(old){
   const p=this.player,r=PHYSICS.radius,eps=1e-7;
-  for(let pass=0;pass<2;pass++)for(const box of this.gadgets?.crates||[]){
+  for(let pass=0;pass<2;pass++)for(const box of solidCrates(this)){
    if(p.y>=box.y+box.h-eps||p.y+1.6<=box.y+eps)continue;
    const minX=box.x-box.w/2-r,maxX=box.x+box.w/2+r,minZ=box.z-box.d/2-r,maxZ=box.z+box.d/2+r;
    if(old.x>minX+eps&&old.x<maxX-eps&&old.z>minZ+eps&&old.z<maxZ-eps){
@@ -167,7 +176,7 @@ export class Game {
  }
  collideCrateCeilings(old){
   const p=this.player;if(p.vy<=0)return;
-  for(const box of this.gadgets?.crates||[]){
+  for(const box of solidCrates(this)){
    const dx=Math.max(Math.abs(p.x-box.x)-box.w/2,0),dz=Math.max(Math.abs(p.z-box.z)-box.d/2,0);
    if(dx*dx+dz*dz>=PHYSICS.radius**2)continue;
    if(old.y+1.6<=box.y+1e-7&&p.y+1.6>=box.y){p.y=box.y-1.6;p.vy=0;}
@@ -175,19 +184,19 @@ export class Game {
  }
  checkPortals(){const p=this.player,portals=this.level.portals||[];
   if(this.portalLock!==null){const locked=portals.find(q=>q.id===this.portalLock);if(!locked||Math.hypot(p.x-locked.x,p.z-locked.z)>2.1)this.portalLock=null;}
-  if(p.portalCd>0||this.portalLock!==null||p.y>1.4||p.y<-.3)return;
-  const source=portals.find(q=>Math.hypot(p.x-q.x,p.z-q.z)<q.radius);
+  if(p.portalCd>0||this.portalLock!==null)return;
+  const source=portals.find(q=>Math.hypot(p.x-q.x,p.z-q.z)<q.radius&&p.y-(q.y??0)<=1.4&&p.y-(q.y??0)>=-.3);
   if(!source)return;const target=portals.find(q=>q.id===source.target);if(!target)return;
   resetGadgetEffects(this);Object.assign(p,{x:target.x,z:target.z,y:target.y,vx:0,vz:0,vy:0,ground:target.platformId,roll:0,dive:0,coyote:.11,airDive:false,invuln:1,portalCd:1.15});this.projectiles=[];this.portalLock=target.id;this.portalUses++;this.emit('portal',{source:source.id,target:target.id,label:target.label});
  }
  checkChallengePortals(){
   const p=this.player,touches=portal=>portal&&Math.hypot(p.x-portal.x,p.z-portal.z)<portal.radius&&Math.abs(p.y-portal.y)<1.3;
   if(this.level.mode==='challenge'){
-   if(touches(this.level.finishPortal)){const result={challengeId:this.level.challenge.id,name:this.level.challenge.name,time:this.elapsed,falls:this.falls};this.exitChallenge({completed:true});this.emit('challengeComplete',result);return true;}
+   if(touches(this.level.finishPortal)){const result={challengeId:this.level.challenge.id,name:this.level.challenge.name,time:this.elapsed,falls:this.falls};this.exitChallenge({completed:true});this.emit('challengeComplete',{...result,reward:this.lastCompletionReward});return true;}
    if(touches(this.level.exitPortal)){this.exitChallenge();return true;}return false;
   }
   if(this._challengeEntryLock!==null){const portal=(this.level.challengePortals||[]).find(q=>q.id===this._challengeEntryLock);if(!portal||Math.hypot(p.x-portal.x,p.z-portal.z)>portal.radius+1)this._challengeEntryLock=null;}
   const portal=(this.level.challengePortals||[]).find(touches);return portal?this.enterChallenge(portal.challengeId):false;
  }
- snapshot(){return {mode:this.level.mode??'arena',challenge:this.level.challenge?{...this.level.challenge}:null,challengePortals:(this.level.challengePortals||[]).map(p=>({...p})),gadgets:snapshotGadgets(this),gadgetPickups:this.gadgetPickups.map(p=>({...p})),resetCooldown:this.resetCooldown,level:this.level.id,mapCode:this.level.code,enemyTier:this.level.enemyTier,status:this.status,time:Number(this.elapsed.toFixed(2)),beans:this.beanPickups,collectedBeans:this.collected.size,beansRemaining:(this.level.beans||[]).length-this.collected.size,score:this.score,beanRefreshes:[...this.beanRespawns].map(([id,at])=>({id,refreshIn:Math.max(0,Math.ceil(at-this.time))})),target:this.level.requiredScore,totalBeans:this.level.totalBeans,totalScore:this.level.totalScore,falls:this.falls,portalUses:this.portalUses,checkpoint:this.checkpointId,actions:{...this.actionCounts},weapon:this.weapon,shield:this.player.shield,shieldsCollected:this.shieldsCollected,shieldsUsed:this.shieldsUsed,shieldPickups:this.shieldPickups.map(s=>({...s,refreshIn:s.available?0:Math.max(0,Math.ceil(s.respawnAt-this.time))})),health:this.player.health,maxHealth:3,defeatedMonsters:this.defeatedMonsters,combatRespawns:this.combatRespawns,monsters:this.monsters.map(({id,type,typeId,tier,enemyName,hitsToDefeat,rank,rankName,x,z,hp,maxHp,shieldHP,shieldMax,contactDamage,windup,dash,state,defeated})=>({id,type,typeId,tier,enemyName,hitsToDefeat,remainingHits:hp+shieldHP,rank,rankName,x,z,hp,maxHp,shieldHP,shieldMax,contactDamage,windup,dash,state,defeated})),projectiles:this.projectiles.map(s=>({...s})),player:{...this.player},progress:this.level.mode==='challenge'?clamp(this.player.z/this.level.finishPortal.z,0,1):clamp(this.score/this.level.requiredScore,0,1)};}
+ snapshot(){return {mode:this.level.mode??'arena',challenge:this.level.challenge?{...this.level.challenge}:null,challengePortals:(this.level.challengePortals||[]).map(p=>({...p})),gadgets:snapshotGadgets(this),gadgetPickups:structuredClone(this.gadgetPickups),resetCooldown:this.resetCooldown,hasCompleted:this.hasCompleted,completedElapsed:this.completedElapsed,lastCompletionReward:this.lastCompletionReward,level:this.level.id,mapCode:this.level.code,enemyTier:this.level.enemyTier,status:this.status,time:Number(this.elapsed.toFixed(2)),beans:this.beanPickups,collectedBeans:this.collected.size,beansRemaining:(this.level.beans||[]).length-this.collected.size,score:this.score,beanRefreshes:[...this.beanRespawns].map(([id,at])=>({id,refreshIn:Math.max(0,Math.ceil(at-this.time))})),target:this.level.requiredScore,totalBeans:this.level.totalBeans,totalScore:this.level.totalScore,falls:this.falls,portalUses:this.portalUses,checkpoint:this.checkpointId,actions:{...this.actionCounts},weapon:this.weapon,shield:this.player.shield,shieldsCollected:this.shieldsCollected,shieldsUsed:this.shieldsUsed,shieldPickups:this.shieldPickups.map(s=>({...s,refreshIn:s.available?0:Math.max(0,Math.ceil(s.respawnAt-this.time))})),health:this.player.health,maxHealth:3,defeatedMonsters:this.defeatedMonsters,combatRespawns:this.combatRespawns,monsters:this.monsters.map(({id,type,typeId,tier,enemyName,hitsToDefeat,rank,rankName,x,z,hp,maxHp,shieldHP,shieldMax,contactDamage,windup,dash,state,defeated})=>({id,type,typeId,tier,enemyName,hitsToDefeat,remainingHits:hp+shieldHP,rank,rankName,x,z,hp,maxHp,shieldHP,shieldMax,contactDamage,windup,dash,state,defeated})),projectiles:this.projectiles.map(s=>({...s})),player:{...this.player},progress:this.level.mode==='challenge'?clamp(this.player.z/this.level.finishPortal.z,0,1):clamp(this.score/this.level.requiredScore,0,1)};}
 }

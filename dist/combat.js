@@ -29,6 +29,9 @@ function blocked(game,from,to,padding=0,y=.8){
   for(const crate of game.gadgets?.crates||[]){
     if(y>=crate.y-1e-7&&y<crate.y+crate.h-1e-7&&segmentBox(from.x,from.z,to.x,to.z,crate,padding))return true;
   }
+  for(const crate of game.level.platforms||[]){
+    if(crate.type==='airCrate'&&y>=(crate.baseY??crate.y-(crate.h??1.25))-1e-7&&y<crate.y-1e-7&&segmentBox(from.x,from.z,to.x,to.z,crate,padding))return true;
+  }
   for(const h of game.level.hazards||[]){
     if(h.type!=='gate'||Math.sin((game.time*h.speed+h.phase)*1.6)>.15||y>h.y+3.2)continue;
     const box={x:h.x,z:h.z,w:h.axis==='x'?.4:h.w,d:h.axis==='x'?h.w:.4};

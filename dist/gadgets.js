@@ -5,7 +5,8 @@ export const GADGETS=Object.freeze({
   grapple:Object.freeze({name:'钩爪',icon:'🪝',initial:0,max:9,range:30,speed:18,duration:3}),
   fish:Object.freeze({name:'咸鱼打击',icon:'🐟',initial:0,max:9,range:4.2})
 });
-const RADIUS=.43,GRAVITY=25,EPS=1e-8,lavaFloors=new WeakMap();
+const RADIUS=.43,GRAVITY=25,EPS=1e-8,lavaFloors=new WeakMap(),staticCrates=new WeakMap();
+export const COMPLETION_REWARD_ITEMS=Object.freeze({crate:2,grapple:1,jetpack:1,fish:1});
 const isGadget=type=>Object.hasOwn(GADGETS,type);
 const keys=Object.keys(GADGETS),distance=(a,b)=>Math.hypot(a.x-b.x,(a.y??0)-(b.y??0),a.z-b.z);
 const point=p=>({x:p.x,y:p.y??0,z:p.z});
@@ -18,12 +19,17 @@ export function initGadgets(game,level=game.level){
   const scene=level.mode==='challenge'?`challenge:${level.challenge.id}`:'arena';
   if(!game._gadgetPickupStates.has(scene)){
     const source=level.gadgetPickups??generateGadgetPickups(game);
-    game._gadgetPickupStates.set(scene,source.filter(p=>isGadget(p.gadget)&&Number.isFinite(p.x)&&Number.isFinite(p.z)).map((p,i)=>({...p,id:p.id??`${scene}-gadget-${i}`,y:p.y??0,amount:Math.max(1,Math.floor(p.amount??1)),available:true})));
+    game._gadgetPickupStates.set(scene,source.filter(p=>isGadget(p.gadget)&&Number.isFinite(p.x)&&Number.isFinite(p.z)).map((p,i)=>({...p,id:p.id??`${scene}-gadget-${i}`,y:p.y??0,amount:Math.max(1,Math.floor(p.amount??1)),baseAmount:Math.max(1,Math.floor(p.amount??1)),available:true})));
   }
   game.gadgetPickups=game._gadgetPickupStates.get(scene);
   return game.gadgets;
 }
 export function cratePlatforms(game){return (game.gadgets?.crates||[]).map(c=>({id:c.id,x:c.x,z:c.z,y:c.y+c.h,w:c.w,d:c.d,type:'crate',checkpoint:false,baseY:c.y,crateId:c.id}));}
+export function solidCrates(game){
+  let fixed=staticCrates.get(game.level);
+  if(!fixed){fixed=(game.level.platforms||[]).filter(p=>p.type==='airCrate').map(p=>({...p,y:p.baseY??p.y-(p.h??GADGETS.crate.h),h:p.h??GADGETS.crate.h,stackLevel:1,static:true}));staticCrates.set(game.level,fixed);}
+  return [...fixed,...(game.gadgets?.crates||[])];
+}
 const platforms=game=>[...(game.level.platforms||[]),...cratePlatforms(game)];
 const stateOf=game=>game.gadgets??initGadgets(game);
 
@@ -39,40 +45,85 @@ export function grantItems(game,items={}){
 export function collectGadgetPickups(game){
   if(game.status!=='playing'||game.respawnDelay)return;
   const state=stateOf(game),p=game.player;
+  flushCompletionRewards(game);
   for(const pickup of game.gadgetPickups||[]){
     if(!pickup.available||Math.hypot(p.x-pickup.x,p.z-pickup.z)>=1||Math.abs(p.y-pickup.y)>=1.3)continue;
     const amount=Math.min(pickup.amount,GADGETS[pickup.gadget].max-state.inventory[pickup.gadget]);
     if(amount<=0)continue;
-    state.inventory[pickup.gadget]+=amount;pickup.available=false;
-    emit(game,'gadgetCollected',{id:pickup.id,gadget:pickup.gadget,amount,x:pickup.x,y:pickup.y,z:pickup.z});
+    state.inventory[pickup.gadget]+=amount;pickup.amount-=amount;pickup.available=pickup.amount>0;
+    if(pickup.reward){let left=amount;for(const record of game._rewardState?.records||[]){if(!pickup.rewardIds?.includes(record.id))continue;const used=Math.min(left,record.remainingItems[pickup.gadget]||0);record.remainingItems[pickup.gadget]-=used;left-=used;record.remaining=Object.values(record.remainingItems).reduce((a,b)=>a+b,0);if(!left)break;}if(left){const extras=rewardState(game).extras;extras[pickup.gadget]=Math.max(0,(extras[pickup.gadget]||0)-left);}}
+    emit(game,'gadgetCollected',{id:pickup.id,gadget:pickup.gadget,amount,reward:Boolean(pickup.reward),x:pickup.x,y:pickup.y,z:pickup.z});
   }
 }
 export function replenishGadgetPickups(game){
-  let count=0;for(const pickup of game.gadgetPickups||[])if(!pickup.available){pickup.available=true;count++;}
+  let count=0;for(const pickup of game.gadgetPickups||[])if(!pickup.reward&&(!pickup.available||pickup.amount<(pickup.baseAmount??pickup.amount))){pickup.amount=pickup.baseAmount??pickup.amount;pickup.available=true;count++;}
   if(count)emit(game,'gadgetSuppliesReplenished',{count});return count;
 }
-function generateGadgetPickups(game){
-  if(game.level.mode==='challenge')return [];
-  const level=game.level,spawn=level.spawn,result=[],doors=[...(level.portals||[]),...(level.challengePortals||[]),level.exitPortal,level.finishPortal].filter(Boolean);
+function pickupPlanner(game,occupied,{reward=false}={}){
+  const level=game.level,spawn=level.spawn,doors=[...(level.portals||[]),...(level.challengePortals||[]),level.exitPortal,level.finishPortal].filter(Boolean);
   const safe=point=>{
     const floor=(level.platforms||[]).find(q=>['plain','checkpoint'].includes(q.type)&&fits(point,q,.65)&&usableSurface(game,q));
     if(!floor)return null;const p={x:point.x,y:floor.y,z:point.z};
     if(Math.hypot(p.x-spawn.x,p.z-spawn.z)<2.4||inLava(game,p)||blocked(game,p,p,.75,1.6))return null;
-    if(doors.some(q=>Math.hypot(p.x-q.x,p.z-q.z)<(q.radius??1.4)+1.5)||(level.monsters||[]).some(q=>Math.hypot(p.x-q.x,p.z-q.z)<3))return null;
+    if(reward&&Math.hypot(p.x-game.player.x,p.z-game.player.z)<1.5)return null;
+    if(doors.some(q=>Math.hypot(p.x-q.x,p.z-q.z)<(q.radius??1.4)+1.5)||(level.monsters||[]).some(q=>Math.hypot(p.x-q.x,p.z-q.z)<3)||(reward&&(game.monsters||[]).some(q=>!q.defeated&&Math.hypot(p.x-q.x,p.z-q.z)<3)))return null;
     if((level.hazards||[]).some(q=>Math.hypot(p.x-q.x,p.z-q.z)<Math.max(2.5,(q.w??0)/2+1.5,(q.range??0)+1.5)))return null;
-    if((level.beans||[]).some(q=>Math.hypot(p.x-q.x,p.z-q.z)<(q.radius??.6)+.9)||(level.shields||[]).some(q=>Math.hypot(p.x-q.x,p.z-q.z)<1.8)||result.some(q=>Math.hypot(p.x-q.x,p.z-q.z)<2.1))return null;
+    if((level.beans||[]).some(q=>Math.hypot(p.x-q.x,p.z-q.z)<(q.radius??.6)+(reward?1.45:.9))||(level.shields||[]).some(q=>Math.hypot(p.x-q.x,p.z-q.z)<1.8)||occupied.some(q=>Math.hypot(p.x-q.x,p.z-q.z)<2.1))return null;
     return {...p,platformId:floor.id};
   };
   const near=[];
   for(let z=-6.8;z<=10.2;z+=1.7)for(let x=-10.2;x<=10.2;x+=1.7){const d=Math.hypot(x,z);if(d>=3&&d<=12)near.push({x:spawn.x+x,z:spawn.z+z,d,front:z>=0?0:1});}
   near.sort((a,b)=>a.front-b.front||a.d-b.d||Math.abs(a.x-spawn.x)-Math.abs(b.x-spawn.x)||a.x-b.x);
   const far=(level.platforms||[]).map(q=>({x:q.x,z:q.z,d:Math.hypot(q.x-spawn.x,q.z-spawn.z)})).sort((a,b)=>a.d-b.d||a.x-b.x||a.z-b.z);
+  return {safe,near,far};
+}
+function generateGadgetPickups(game){
+  if(game.level.mode==='challenge')return [];
+  const result=[],{safe,near,far}=pickupPlanner(game,result);
   for(let n=0;n<12;n++){
     const candidates=n<4?near:far.filter(q=>q.d>=14+(n-4)*2);
     let p=null;for(const candidate of candidates){p=safe(candidate);if(p)break;}if(!p)continue;
     result.push({id:`arena-gadget-${n}`,gadget:keys[n%keys.length],amount:1,...p});
   }
   return result;
+}
+const rewardState=game=>game._rewardState??(game._rewardState={serial:0,records:[],extras:{},unplacedExtras:{}});
+export function snapshotCompletionReward(game){const record=rewardState(game).records.at(-1);return record?structuredClone(record):null;}
+function placeRewardItems(game,record){
+  for(const type of keys){
+    const amount=record.unplacedItems[type]||0;if(!amount)continue;
+    let pickup=(game.gadgetPickups||[]).find(p=>p.reward&&p.gadget===type);
+    const occupied=(game.gadgetPickups||[]).filter(p=>p!==pickup),plan=pickupPlanner(game,occupied,{reward:true});
+    let location=pickup?plan.safe(pickup):null;
+    if(pickup&&!location)continue; // Keep the earned units queued until its fixed pad is safe.
+    if(!pickup){
+      for(const point of [...plan.near,...plan.far]){location=plan.safe(point);if(location)break;}
+      if(location){pickup={id:`completion-${type}`,gadget:type,amount:0,baseAmount:0,available:false,reward:true,rewardIds:[],...location};game.gadgetPickups.push(pickup);}
+      else{pickup=game.gadgetPickups.find(p=>p.available&&p.gadget===type&&pickupPlanner(game,game.gadgetPickups.filter(q=>q!==p),{reward:true}).safe(p));if(pickup){location={x:pickup.x,y:pickup.y,z:pickup.z,platformId:pickup.platformId};const extras=rewardState(game).extras;extras[type]=(extras[type]||0)+pickup.amount;pickup.reward=true;pickup.rewardIds=[];}}
+    }
+    if(!pickup)continue; // A tiny/blocked fixture can carry the unplaced units to the next arena.
+    pickup.amount+=amount;pickup.available=true;if(record.id)pickup.rewardIds.push(record.id);record.unplacedItems[type]=0;
+    if(!record.pickupIds.includes(pickup.id)){record.pickupIds.push(pickup.id);record.locations.push({id:pickup.id,gadget:type,...location});}
+  }
+  record.spawned=record.pickupIds.length;
+}
+export function flushCompletionRewards(game){
+  if(game.level.mode==='challenge')return;
+  const state=rewardState(game);for(const record of state.records)if(Object.values(record.unplacedItems).some(n=>n>0))placeRewardItems(game,record);
+  if(Object.values(state.unplacedExtras).some(n=>n>0))placeRewardItems(game,{id:null,unplacedItems:state.unplacedExtras,pickupIds:[],locations:[]});
+}
+export function restoreCompletionRewards(game){
+  if(game.level.mode==='challenge')return;
+  const state=rewardState(game);state.unplacedExtras={...state.extras};
+  for(const record of state.records){record.pickupIds=[];record.locations=[];record.spawned=0;record.unplacedItems={...record.remainingItems};}
+  flushCompletionRewards(game);
+}
+export function spawnCompletionReward(game,{source='arena',sourceId=game.level.code,items=COMPLETION_REWARD_ITEMS}={}){
+  if(game.level.mode==='challenge')return null;
+  const state=rewardState(game),earned=Object.fromEntries(keys.map(type=>[type,Math.max(0,Math.floor(items[type]??0))]));
+  const record={id:`reward-${++state.serial}`,source,sourceId,items:{...earned},remainingItems:{...earned},unplacedItems:{...earned},pickupIds:[],locations:[],spawned:0,remaining:Object.values(earned).reduce((a,b)=>a+b,0)};
+  state.records.push(record);placeRewardItems(game,record);const reward=structuredClone(record);
+  emit(game,'rewardSpawned',{...reward,reward:structuredClone(reward),count:record.spawned});return reward;
 }
 
 function segmentBox(a,b,box,padding=0,height=0){
@@ -85,7 +136,7 @@ function segmentBox(a,b,box,padding=0,height=0){
 }
 function blocked(game,a,b,padding=RADIUS,height=1.6){
   for(const wall of game.level.walls||[])if(segmentBox(a,b,wall,padding,height))return true;
-  for(const box of game.gadgets?.crates||[]){
+  for(const box of solidCrates(game)){
     if(Math.min(a.y??0,b.y??0)>=box.y+box.h-EPS||Math.max(a.y??0,b.y??0)+height<=box.y+EPS)continue;
     if(segmentBox(a,b,box,padding,height))return true;
   }
@@ -150,11 +201,17 @@ function lavaOverlap(game,box){
   const zones=[...(game.level.lavaZones||[]),...(game.level.platforms||[]).filter(q=>q.type==='lava')];
   return zones.some(q=>box.y<=(q.y??0)+.22&&(q.radius!==undefined?Math.hypot(Math.max(Math.abs(box.x-q.x)-box.w/2,0),Math.max(Math.abs(box.z-q.z)-box.d/2,0))<q.radius:Math.abs(box.x-q.x)<(box.w+q.w)/2-EPS&&Math.abs(box.z-q.z)<(box.d+q.d)/2-EPS));
 }
+function floorSolids(game){
+  return (game.level.platforms||[]).filter(q=>!['airCrate','lava','void'].includes(q.type)&&(!game.surface||game.surface(q))).map(q=>{
+    const h=q.thickness??(game.level.mode==='challenge'?.6:.5),y=q.baseY??q.y-h;
+    return {x:q.x+(q.type==='moving'?Math.sin(game.time*q.speed+q.phase)*q.amp:0),z:q.z,y,w:q.w,d:q.d,h:q.y-y};
+  });
+}
 // Check the union of coplanar floor rectangles, so a crate can span tile seams
 // without accepting even a small unsupported hole beneath its footprint.
 function floorSupport(game,box,y){
   const left=box.x-box.w/2,right=box.x+box.w/2,back=box.z-box.d/2,front=box.z+box.d/2;
-  const floors=(game.level.platforms||[]).filter(q=>usableSurface(game,q)&&Math.abs(q.y-y)<.025&&q.x+q.w/2>left+EPS&&q.x-q.w/2<right-EPS&&q.z+q.d/2>back+EPS&&q.z-q.d/2<front-EPS);
+  const floors=(game.level.platforms||[]).filter(q=>q.type!=='airCrate'&&usableSurface(game,q)&&Math.abs(q.y-y)<.025&&q.x+q.w/2>left+EPS&&q.x-q.w/2<right-EPS&&q.z+q.d/2>back+EPS&&q.z-q.d/2<front-EPS);
   if(!floors.length)return null;
   const xs=[...new Set([left,right,...floors.flatMap(q=>[Math.max(left,q.x-q.w/2),Math.min(right,q.x+q.w/2)])])].sort((a,b)=>a-b);
   const zs=[...new Set([back,front,...floors.flatMap(q=>[Math.max(back,q.z-q.d/2),Math.min(front,q.z+q.d/2)])])].sort((a,b)=>a-b);
@@ -165,17 +222,17 @@ function clearPlacement(game,box){
   const doors=[...(game.level.portals||[]),...(game.level.challengePortals||[]),game.level.exitPortal,game.level.finishPortal].filter(Boolean);
   if(doors.some(door=>{const dx=Math.max(Math.abs(box.x-door.x)-box.w/2,0),dz=Math.max(Math.abs(box.z-door.z)-box.d/2,0);return box.y<(door.y??0)+4.2&&box.y+box.h>(door.y??0)-.2&&dx*dx+dz*dz<((door.radius??1.4)+.1)**2;}))return false;
   if(lavaOverlap(game,box)||actorOverlap(box,game.player,RADIUS)||(game.monsters||[]).some(m=>!m.defeated&&actorOverlap(box,m,.65)))return false;
-  const solids=[...(game.level.walls||[]).map(w=>({...w,y:w.y??0})),...(game.level.hazards||[]).filter(h=>h.type==='gate').map(gateBox),...(game.gadgets?.crates||[])];
+  const solids=[...(game.level.walls||[]).map(w=>({...w,y:w.y??0})),...(game.level.hazards||[]).filter(h=>h.type==='gate').map(gateBox),...solidCrates(game),...floorSolids(game)];
   if(solids.some(q=>overlap(box,q)))return false;
   // The crate must also be reachable from the player's hand; closed or open gate
   // frames are not valid placement corridors. Lower boxes in its own stack are allowed.
   const hand={x:game.player.x,y:game.player.y+1,z:game.player.z},aim={x:box.x,y:box.y+box.h/2,z:box.z};
-  for(const solid of solids){if(solid.id?.startsWith?.('crate-')&&Math.abs(solid.x-box.x)<EPS&&Math.abs(solid.z-box.z)<EPS)continue;if(segmentBox(hand,aim,solid,.05,0))return false;}
+  for(const solid of solids){if((solid.static||solid.id?.startsWith?.('crate-'))&&Math.abs(solid.x-box.x)<EPS&&Math.abs(solid.z-box.z)<EPS)continue;if(segmentBox(hand,aim,solid,.05,0))return false;}
   return true;
 }
 function placeCrate(game){
   const state=stateOf(game),p=game.player,f=facing(p),spec=GADGETS.crate,ideal={x:p.x+f.x*2.3,z:p.z+f.z*2.3};
-  const tops=state.crates.filter(c=>!state.crates.some(above=>above.platformId===c.id)).map(c=>({c,d:Math.hypot(c.x-p.x,c.z-p.z)})).filter(({c,d})=>d>spec.w/2+RADIUS+.04&&d<=4.2&&Math.hypot(c.x-ideal.x,c.z-ideal.z)<=1&&(c.x-p.x)*f.x+(c.z-p.z)*f.z>d*.65).sort((a,b)=>Math.hypot(a.c.x-ideal.x,a.c.z-ideal.z)-Math.hypot(b.c.x-ideal.x,b.c.z-ideal.z));
+  const crates=solidCrates(game),tops=crates.filter(c=>!crates.some(above=>above.platformId===c.id)).map(c=>({c,d:Math.hypot(c.x-p.x,c.z-p.z)})).filter(({c,d})=>d>spec.w/2+RADIUS+.04&&d<=4.2&&Math.hypot(c.x-ideal.x,c.z-ideal.z)<=(c.static?1.7:1)&&(c.x-p.x)*f.x+(c.z-p.z)*f.z>d*.65).sort((a,b)=>Math.hypot(a.c.x-ideal.x,a.c.z-ideal.z)-Math.hypot(b.c.x-ideal.x,b.c.z-ideal.z));
   if(tops.length){const top=tops[0].c;if(top.stackLevel>=spec.maxStack)return null;const box={id:`crate-${state.nextCrateId}`,x:top.x,z:top.z,y:top.y+top.h,w:spec.w,d:spec.d,h:spec.h,platformId:top.id,stackLevel:top.stackLevel+1};return clearPlacement(game,box)?box:null;}
   const choices=[ideal,...(game.level.platforms||[]).map(q=>({x:q.x,z:q.z}))].filter(q=>{const dx=q.x-p.x,dz=q.z-p.z,d=Math.hypot(dx,dz);return d>=1.5&&d<=4.2&&Math.hypot(q.x-ideal.x,q.z-ideal.z)<=1.7&&(dx*f.x+dz*f.z)/d>.65;}).sort((a,b)=>Math.hypot(a.x-ideal.x,a.z-ideal.z)-Math.hypot(b.x-ideal.x,b.z-ideal.z));
   for(const q of choices){
@@ -184,20 +241,40 @@ function placeCrate(game){
   }
   return null;
 }
+function placeAirCrate(game){
+  const state=stateOf(game),p=game.player,spec=GADGETS.crate;
+  // A descending player may be caught below the take-off ledge. Keep the whole
+  // box above the map's bottom plane; actual floor slabs are checked separately.
+  const floors=(game.level.platforms||[]).filter(q=>!['airCrate','lava','void'].includes(q.type));
+  const baseY=floors.length?Math.min(...floors.map(q=>q.y)):(game.level.spawn.y??0);
+  if(p.y<=-1||p.y-spec.h<baseY-EPS)return null;
+  const box={id:`crate-${state.nextCrateId}`,x:p.x,z:p.z,y:p.y-spec.h,w:spec.w,d:spec.d,h:spec.h,platformId:null,stackLevel:1,airborne:true};
+  return clearPlacement(game,box)?box:null;
+}
+function landOnAirCrate(game,box){
+  const state=stateOf(game),p=game.player;
+  if(state.grapple)stopGrapple(game,'crate');
+  if(state.jetpack){state.jetpack=null;emit(game,'gadgetEnd',{gadget:'jetpack',reason:'crate'});}
+  Object.assign(p,{ground:box.id,vx:0,vz:0,vy:0,roll:0,dive:0,airDive:false,coyote:.11,jumpBuffer:0});
+}
 
 export function useGadget(game,type){
   if(!isGadget(type)||game.status!=='playing'||game.respawnDelay||game.player.health<=0)return false;
   const state=stateOf(game),p=game.player;state.selected=type;
   if(type==='grapple'&&state.grapple){stopGrapple(game,'cancelled');return true;}
   if(state.inventory[type]<=0||inLava(game,p))return false;
+  let activation={};
   if(type==='jetpack'){
     if(state.jetpack||state.grapple)return false;
     const floor=platforms(game).find(q=>q.id===p.ground)??supportAt(game,p),baseY=floor?.y??0;
     state.jetpack={remaining:GADGETS.jetpack.duration,baseY,maxY:baseY+GADGETS.jetpack.maxHeight};
   }else if(type==='crate'){
-    if(p.ground===null||p.ground===undefined||state.jetpack||state.grapple||state.crates.length>=GADGETS.crate.maxActive)return false;
-    const placed=placeCrate(game);if(!placed)return false;
+    if(state.crates.length>=GADGETS.crate.maxActive)return false;
+    const airborne=p.ground===null||p.ground===undefined||state.jetpack||state.grapple;
+    const placed=airborne?placeAirCrate(game):placeCrate(game);if(!placed)return false;
     state.crates.push(placed);state.nextCrateId++;
+    activation={airborne:Boolean(placed.airborne)};
+    if(placed.airborne)landOnAirCrate(game,placed);
   }else if(type==='fish'){
     if(!fishStrike(game))return false;
     state.fishSwing=.42;
@@ -207,7 +284,7 @@ export function useGadget(game,type){
     state.grapple={state:'pulling',start:point(p),target:selected.target,anchor:selected.anchor,path:selected.path,pathIndex:0,remaining:GADGETS.grapple.duration};
     p.ground=null;p.roll=0;p.dive=0;p.coyote=0;p.jumpBuffer=0;
   }
-  state.inventory[type]--;emit(game,'gadgetStart',{gadget:type,inventory:state.inventory[type]});return true;
+  state.inventory[type]--;emit(game,'gadgetStart',{gadget:type,inventory:state.inventory[type],...activation});return true;
 }
 export function gadgetAction(game,name){return isGadget(name)?useGadget(game,name):undefined;}
 

@@ -4,12 +4,18 @@ import {AVATARS,DEFAULT_AVATAR,getAvatar} from './avatars.js';
 import {RewardedAdSession} from './rewarded-ad.js';
 
 const $=selector=>document.querySelector(selector),keys={jetpack:'Z',crate:'X',grapple:'C',fish:'G'};
+export function completionRewardHTML(reward){
+ if(!reward?.items)return '';
+ const items=Object.entries(GADGETS).filter(([id])=>reward.items[id]>0).map(([id,item])=>`<span>${item.icon} ${item.name} <b>×${reward.items[id]}</b></span>`).join('');
+ return `<section class="completion-loot" aria-label="通关道具奖励"><h3>🎁 通关奖励已出现</h3><div>${items}</div><p>找到草坪上的金色奖励补给，走近拾取才会加入背包。背包满时奖励会留在原处；未拾取的奖励可带到下一张吃豆地图。</p></section>`;
+}
 export function createAdventureUI({game,getRenderer,showDialog,closeDialog,getDialog,toast,clearControls,resetPlayer}){
  let avatar=DEFAULT_AVATAR,ad=null,navigation=null,challengePage=0;const challengeRecords={};
  try{avatar=getAvatar(localStorage.getItem('eggy-avatar-v1')).id;}catch{}
  try{const saved=JSON.parse(localStorage.getItem('eggy-challenges-v1')||'{}');for(const c of CHALLENGES)if(saved[c.id]===true)challengeRecords[c.id]=true;}catch{}
  $('#adventure-panel').innerHTML=`<div class="adventure-links"><button id="challenge-guide">闯关 1–50 ↗</button><button id="wardrobe">🥚 换形象</button><button id="reward-ad">补给广告</button></div><div class="gadget-slots">${Object.entries(GADGETS).map(([id,g])=>`<button data-gadget="${id}" aria-label="${g.name}，尚未拾取，按${keys[id]}"><kbd>${keys[id]}</kbd><i>${g.icon}</i><span>${g.name}</span><b id="${id}-count">0</b></button>`).join('')}</div><small id="gadget-status">开局没有道具 · 靠近地图上的发光道具拾取</small><small id="portal-navigation" hidden></small><button id="reset-player" class="reset-player">↺ 复位 <span>R + U + O</span></button><button id="challenge-exit" hidden>退出闯关 · 返回草坪</button>`;
  $('#adventure-panel').setAttribute('aria-label','闯关、道具和蛋仔形象');
+ $('#gadget-status').insertAdjacentHTML('afterend','<small id="reward-navigation" class="reward-navigation" hidden></small>');
 
  function cancelAd(){ad?.cancel();ad=null;}
  function syncScene(){
@@ -28,7 +34,7 @@ export function createAdventureUI({game,getRenderer,showDialog,closeDialog,getDi
  function useItem(id){
   if(getDialog())return;
   if(game.status==='ready'){game.start();$('#ready').hidden=true;document.body.classList.remove('awaiting-start');}
-  if(!game.action(id))toast(game.gadgets.inventory[id]<=0?'还没有这个道具，先走近地图上对应的发光道具拾取':id==='grapple'?'前方没有可锁定的安全落脚点；转向发光锚点再抛钩':id==='crate'?'请站稳后朝空地放箱，或朝已有箱子叠放；最多 3 层、场上 9 个':'喷气背包正在使用，或钩爪正在拉动');
+  if(!game.action(id))toast(game.gadgets.inventory[id]<=0?'还没有这个道具，先走近地图上对应的发光道具拾取':id==='grapple'?'前方没有可锁定的安全落脚点；转向发光锚点再抛钩':id==='crate'?'放箱需要足够空间；跳高后按 X 可垫在脚下，场上最多 9 个':'喷气背包正在使用，或钩爪正在拉动');
   document.activeElement?.blur();
  }
  function challengeGuide(){
@@ -49,7 +55,7 @@ export function createAdventureUI({game,getRenderer,showDialog,closeDialog,getDi
  }
  function reward(){
   cancelAd();const session=new RewardedAdSession(6);session.suspend();ad=session;
-  showDialog('reward',`<div class="eyebrow">OPTIONAL REWARD · LOCAL PREVIEW</div><h2 id="modal-title">地图道具补给</h2><div class="local-ad-label">本地模拟广告 · 未接入真实广告平台</div><div class="reward-stage"><span>🚀 📦 🪝 🐟</span><h3>下一座岛，就在前方</h3><p>背包开局是空的。找到发光道具，走近拾取，再用咸鱼把拦路敌人击飞！</p><div class="reward-progress"><i id="reward-fill"></i></div><strong id="reward-countdown">观看 6 秒后可补充地图道具</strong></div><p>完整观看可让本场景已拾取的道具重新出现，需要走到原处拾取才会增加库存。每种最多携带 9 个。提前关闭没有补给，游戏暂停。</p><button class="primary" id="claim-reward" disabled>观看中 · 6 秒</button><button class="secondary" id="cancel-reward">关闭，继续游戏</button>`);
+  showDialog('reward',`<div class="eyebrow">OPTIONAL REWARD · LOCAL PREVIEW</div><h2 id="modal-title">地图道具补给</h2><div class="local-ad-label">本地模拟广告 · 未接入真实广告平台</div><div class="reward-stage"><span>🚀 📦 🪝 🐟</span><h3>下一座岛，就在前方</h3><p>背包开局是空的。找到发光道具，走近拾取，再用咸鱼把拦路敌人击飞！</p><div class="reward-progress"><i id="reward-fill"></i></div><strong id="reward-countdown">观看 6 秒后可补充地图道具</strong></div><p>完整观看可让本场景已拾取的普通道具重新出现，需要走到原处拾取才会增加库存。金色通关奖励不会随广告重刷。每种最多携带 9 个。提前关闭没有补给，游戏暂停。</p><button class="primary" id="claim-reward" disabled>观看中 · 6 秒</button><button class="secondary" id="cancel-reward">关闭，继续游戏</button>`);
   $('#cancel-reward').onclick=()=>closeDialog();
   $('#claim-reward').onclick=()=>{
    if(ad!==session||getDialog()!=='reward'||!session.claim())return;
@@ -59,7 +65,7 @@ export function createAdventureUI({game,getRenderer,showDialog,closeDialog,getDi
  function challengeResult(e){
   challengeRecords[e.challengeId]=true;try{localStorage.setItem('eggy-challenges-v1',JSON.stringify(challengeRecords));}catch{}
   const index=CHALLENGES.findIndex(c=>c.id===e.challengeId),next=CHALLENGES[index+1];
-  showDialog('challenge-result',`<div class="result"><div class="eyebrow">ADVENTURE COMPLETE · ${Object.keys(challengeRecords).length} / ${CHALLENGES.length}</div><div class="result-mark">🏁</div><h2 id="modal-title">第 ${index+1} 关 · ${e.name}，成功！</h2><p>你走进了金色终点门，已返回原来的吃豆草坪。</p><div class="result-detail"><div>${e.time.toFixed(1)} 秒<small>闯关用时</small></div><div>${e.falls}<small>跌落次数</small></div></div>${next?`<button class="primary" id="challenge-next">下一关 · ${next.name} ↗</button>`:''}<button class="secondary" id="challenge-result-close">继续吃豆冒险</button><button class="secondary" id="challenge-more">查看 50 关闯关大厅</button></div>`);
+  showDialog('challenge-result',`<div class="result"><div class="eyebrow">ADVENTURE COMPLETE · ${Object.keys(challengeRecords).length} / ${CHALLENGES.length}</div><div class="result-mark">🏁</div><h2 id="modal-title">第 ${index+1} 关 · ${e.name}，成功！</h2><p>你走进了金色终点门，已返回原来的吃豆草坪。</p>${completionRewardHTML(e.reward)}<div class="result-detail"><div>${e.time.toFixed(1)} 秒<small>闯关用时</small></div><div>${e.falls}<small>跌落次数</small></div></div>${next?`<button class="primary" id="challenge-next">下一关 · ${next.name} ↗</button>`:''}<button class="secondary" id="challenge-result-close">继续吃豆冒险</button><button class="secondary" id="challenge-more">查看 50 关闯关大厅</button></div>`);
   if(next)$('#challenge-next').onclick=()=>{game.chooseChallenge(next.id);navigation=next.id;closeDialog();toast(`第 ${next.number} 关入口已标记，走进传送门继续`);};
   $('#challenge-result-close').onclick=()=>closeDialog();$('#challenge-more').onclick=()=>{challengePage=Math.floor((index+1)/10)%5;challengeGuide();};
  }
@@ -70,14 +76,17 @@ export function createAdventureUI({game,getRenderer,showDialog,closeDialog,getDi
    toast(e.type==='challengeEnter'?`进入${e.name} · 找绿色检查点，走到金色终点门`:'返回吃豆草坪，探索进度保留');return true;
   }
   if(e.type==='challengeComplete'){challengeResult(e);return true;}
-  if(e.type==='gadgetCollected'){toast(`发现${GADGETS[e.gadget].name} +${e.amount} · 按 ${keys[e.gadget]} 使用`);return true;}
-  if(e.type==='gadgetStart'){toast(e.gadget==='fish'?'咸鱼打击！把面前的敌人击飞':e.gadget==='grapple'?'钩爪已锁定，正在拉向落脚点':e.gadget==='jetpack'?'喷气背包启动 · 5 秒升空，可控制方向':'垫脚箱已放好 · 空格跳上箱顶，再按 X 可叠高');return true;}
+  if(e.type==='rewardSpawned'){toast('通关奖励已放到草坪 · 沿金色补给提示走近拾取');return true;}
+  if(e.type==='gadgetCollected'){toast(`${e.reward?'领取通关奖励：':'发现'}${GADGETS[e.gadget].name} +${e.amount} · 按 ${keys[e.gadget]} 使用`);return true;}
+  if(e.type==='gadgetStart'){toast(e.gadget==='fish'?'咸鱼打击！把面前的敌人击飞':e.gadget==='grapple'?'钩爪已锁定，正在拉向落脚点':e.gadget==='jetpack'?'喷气背包启动 · 5 秒升空，可控制方向':e.airborne?'空中垫箱成功！已站上箱顶 · 空格再跳可继续攀高':'前方垫脚箱已放好 · 空格跳上箱顶，跳起按 X 可空中垫高');return true;}
   return false;
  }
  function frame(dt){
   const g=game.gadgets,challenge=game.level.mode==='challenge';
   for(const [id,item]of Object.entries(GADGETS)){const button=$(`[data-gadget="${id}"]`);$(`#${id}-count`).textContent=g.inventory[id];button.classList.toggle('selected',g.selected===id&&g.inventory[id]>0);button.classList.toggle('empty',g.inventory[id]===0);button.setAttribute('aria-label',`${item.name}，${g.inventory[id]>0?`剩余${g.inventory[id]}个`:'尚未拾取'}，按${keys[id]}`);}
-  $('#gadget-status').textContent=g.fishSwing>0?'🐟 咸鱼打击！':g.grapple?'🪝 已锁定 · 再按 C 可收钩':g.jetpack?`🚀 喷气中 · ${g.jetpack.remaining.toFixed(1)} 秒`:g.crates.length?`📦 已放 ${g.crates.length} 个 · 空格跳上箱顶 · X 叠高`:'靠近发光道具拾取 · Z 喷气 / X 箱 / C 钩 / G 咸鱼';
+  $('#gadget-status').textContent=g.fishSwing>0?'🐟 咸鱼打击！':g.grapple?'🪝 拉动中 · X 空中垫箱 / C 收钩':g.jetpack?`🚀 喷气中 ${g.jetpack.remaining.toFixed(1)} 秒 · X 脚下垫箱`:g.crates.length?`📦 已放 ${g.crates.length} / 9 个 · 空格起跳 → X 空中垫高`:'靠近发光道具拾取 · Z 喷气 / X 箱 / C 钩 / G 咸鱼';
+  const loot=(game.gadgetPickups||[]).filter(p=>p.reward&&p.available),rewardNav=$('#reward-navigation');rewardNav.hidden=loot.length===0;
+  if(loot.length){const available=loot.filter(p=>g.inventory[p.gadget]<GADGETS[p.gadget].max),nearest=[...(available.length?available:loot)].sort((a,b)=>Math.hypot(a.x-game.player.x,a.z-game.player.z)-Math.hypot(b.x-game.player.x,b.z-game.player.z))[0],dx=nearest.x-game.player.x,dz=nearest.z-game.player.z,full=available.length===0;rewardNav.textContent=`🎁 通关奖励 ${loot.reduce((sum,p)=>sum+p.amount,0)} 件 · ${full?'先用掉道具再来拾取':`${GADGETS[nearest.gadget].name} ${Math.ceil(Math.hypot(dx,dz))} 米 · ${Math.abs(dx)<1?'':dx>0?'向右':'向左'}${Math.abs(dz)<1?'':dz>0?'向前':'向后'}`}`;}
   const reset=$('#reset-player'),cooldown=game.resetCooldown||0;reset.disabled=cooldown>0;reset.innerHTML=`↺ 复位 <span>${cooldown>0?`${Math.ceil(cooldown)} 秒`:'R + U + O'}</span>`;reset.setAttribute('aria-label',cooldown>0?`复位冷却，剩余${Math.ceil(cooldown)}秒`:'复位，同时按住R、U、O，冷却10秒');
   const gate=(game.level.challengePortals||[]).find(p=>p.challengeId===navigation),nav=$('#portal-navigation');nav.hidden=!gate;
   if(gate){const dx=gate.x-game.player.x,dz=gate.z-game.player.z;nav.textContent=`${gate.name} ${Math.ceil(Math.hypot(dx,dz))} 米 · ${Math.abs(dx)<2?'':dx>0?'向右':'向左'}${Math.abs(dz)<2?'':dz>0?'向前':'向后'}`;}
@@ -88,7 +97,8 @@ export function createAdventureUI({game,getRenderer,showDialog,closeDialog,getDi
   }
  }
  function enhanceHelp(){
-  $('#modal-content .help-grid')?.insertAdjacentHTML('afterbegin',`<div class="help-card"><h3>50 关闯关 / 传送门</h3><kbd>B 闯关大厅</kbd> <kbd>V 换形象</kbd><p>闯关大厅有第 1–50 关，分成 5 页，每关有编号、路线和机关组合。选关后，草坪起点的传送门会标明目标关卡；必须走进标注的门才能进入。走到绿色检查点保存位置，最后进入金色终点门过关；结算可标记下一关入口。8 种原创蛋仔形象免费切换。</p></div><div class="help-card"><h3>先拾取，再使用道具</h3><kbd>Z 喷气</kbd> <kbd>X 垫脚箱</kbd> <kbd>C 钩爪</kbd> <kbd>G 咸鱼打击</kbd><p>背包开局每种都是 0，要走近地图上有名称的发光道具才能发现并获得，每种最多携带 9 个。喷气背包升空 5 秒；垫脚箱放在前方，用方向键配合空格跳上箱顶，再起跳攀高，最多叠 3 层、场上 9 个。钩爪锁住面朝方向 30 米内的安全落脚点，沿绳子拉过去，再按 C 可收钩。咸鱼打击消耗 1 条咸鱼，将面前 4.2 米内无遮挡的敌人击飞并击败，不增加吃豆积分。死亡和进出闯关不退还消耗；已放箱子会被清除。看完 6 秒本地模拟广告，只会补充地图上的道具，需要重新走近拾取。</p></div><div class="help-card"><h3>同时按住三键复位</h3><kbd>R + U + O</kbd><p>同时按住 R、U、O 才会回到最近检查点；单独按 R 不会复位，也可以点击道具栏的「复位」。每次使用后冷却 10 个游戏秒，按钮显示剩余秒数，暂停不计时。复位保留积分和已拾取、已消耗的道具状态。</p></div>`);
+  const boxHelp='<div class="help-card"><h3>空中垫箱，继续攀高</h3><kbd>空格 → X → 空格</kbd><p>先拾取垫脚箱。地面按 X 放在前方；跳到空中按 X，箱子会直接出现在脚下，接住蛋仔，再按空格就能继续跳高。跳得太低、箱体会挤进地面或障碍时不能放置。钩爪拉动或喷气升空时也能按 X 放箱，成功后会停下钩爪或喷气，站到箱顶。地面叠箱最多 3 层，空中可继续向上搭，场上总共最多 9 个。天空主题关有带青色悬浮环的空中箱，可落脚，也可用钩爪锁定。</p></div>';
+  $('#modal-content .help-grid')?.insertAdjacentHTML('afterbegin',`${boxHelp}<div class="help-card"><h3>奖励 / 真捷径 / 消失地板</h3><kbd>3 秒变红 → 5 秒消失</kbd><p>关卡有多条路线，可以自行探索。消失地板踩上后逐渐变红，3 秒完全变红，5 秒才消失，第 9 秒恢复；暂停不计时。通关后会出现垫脚箱 ×2、钩爪 ×1、喷气背包 ×1、咸鱼 ×1 的金色补给，走近拾取，背包满时可以晚点回来拿。</p></div><div class="help-card"><h3>50 关闯关 / 传送门</h3><kbd>B 闯关大厅</kbd> <kbd>V 换形象</kbd><p>闯关大厅有第 1–50 关，分成 5 页，每关有编号、路线和机关组合，可以自由尝试不同路线。选关后，草坪起点的传送门会标明目标关卡；必须走进标注的门才能进入。走到绿色检查点保存位置，最后进入金色终点门过关；结算可标记下一关入口。8 种原创蛋仔形象免费切换。</p></div><div class="help-card"><h3>先拾取，再使用道具</h3><kbd>Z 喷气</kbd> <kbd>X 垫脚箱</kbd> <kbd>C 钩爪</kbd> <kbd>G 咸鱼打击</kbd><p>背包开局每种都是 0，走近地图上有名称的发光道具才能拾取，每种最多携带 9 个。喷气背包升空 5 秒；垫脚箱既能在地面放，也能跳起后垫在脚下。钩爪锁住面朝方向 30 米内的安全落脚点，沿绳子拉过去，再按 C 可收钩。咸鱼消耗 1 条，将面前 4.2 米内无遮挡的敌人击飞并击败，不增加吃豆积分。死亡和进出闯关不退还消耗，并清除已放箱子。6 秒本地模拟广告只恢复普通补给，需要重新走近拾取；不会重刷通关奖励。</p></div><div class="help-card"><h3>同时按住三键复位</h3><kbd>R + U + O</kbd><p>同时按住 R、U、O 才会回到最近检查点；单独按 R 不会复位，也可以点击道具栏的「复位」。每次使用后冷却 10 个游戏秒，按钮显示剩余秒数，暂停不计时。复位保留积分和已拾取、已消耗的道具状态。</p></div>`);
  }
  $('#challenge-guide').onclick=challengeGuide;$('#wardrobe').onclick=wardrobe;$('#reward-ad').onclick=reward;
  $('#reset-player').onclick=()=>resetPlayer();

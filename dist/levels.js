@@ -18,6 +18,7 @@ export const MAP_STYLES=['圆环草坪','花田广场','阳光椭圆','四叶花
 export const MECHANIC_HINTS={sweeper:'旋转横杆：跳起来躲开，也可以从旁边绕过。',pendulum:'摆锤：观察节奏，从空档穿过。',bumper:'弹弹球：会把你撞开，可以绕行。',gate:'节拍门：红灯停，绿灯行，也可以绕开。',pusher:'推板：等它收回再通过。',ice:'冰面：提前减速。',wind:'风场：朝反方向调整移动。',conveyor:'传送带：看箭头，也能逆向走。',collapse:'裂纹地板：踩上后很快会消失。',bounce:'弹跳垫：踩上自动弹起，空中可以飞扑。'};
 const BEAN_RADIUS={1:1,5:1.2,10:1.4,100:1.7,500:2,1000:2.2};
 const DIRECTIONS=[[1,0],[-1,0],[0,1],[0,-1]];
+const TRAP_CLEARANCE_CELLS=[...DIRECTIONS,[1,1],[1,-1],[-1,1],[-1,-1]];
 function random(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 const distance=(a,b={x:0,z:0})=>Math.hypot(a.x-b.x,a.z-b.z);
 const cellKey=(x,z)=>`${x},${z}`;
@@ -110,19 +111,33 @@ function makeBeans(id,platforms,portals,clearing,shields,style,r){
  for(const bean of beans){bean.radius=BEAN_RADIUS[bean.value];bean.y=bean.radius;}
  return {beans,totalScore};
 }
-function makeTrapBeans(id,beans,platforms,portals,clearing,shields,penaltyTotal){
+function makeTrapBeans(id,beans,platforms,portals,clearing,shields,totalScore){
  const cells=new Map(platforms.map(p=>[cellKey(p.cx,p.cz),p]));
  const checkpoints=platforms.filter(p=>p.checkpoint),mechanics=platforms.filter(p=>!['plain','checkpoint'].includes(p.type));
  const first=beans[0],lineLength=first.x**2+first.z**2;
  const corridorDistance=p=>{const t=Math.max(0,Math.min(1,(p.x*first.x+p.z*first.z)/lineLength));return Math.hypot(p.x-first.x*t,p.z-first.z*t);};
- const traps=[],specs=[{effect:'subtract',value:-penaltyTotal,radius:penaltyTotal===100?1.7:1.25,target:{x:13.6+((id-1)%3)*3.4,z:17}},{effect:'zero',value:0,radius:1.45,target:{x:27.2,z:20.4+((id-1)%3)*3.4}}];
+ const chapter=Math.floor((id-1)/100),negativeCount=Math.min(4,2+Math.floor(chapter/3)),zeroCount=id>=501?2:1;
+ // Reserve every small penalty before upgrading any of them. Even eating all
+ // subtract beans leaves enough of the original positive score to reach the goal.
+ let upgradeBudget=Math.floor(totalScore-(id+11))-negativeCount*10;
+ if(upgradeBudget<0)throw new Error(`地图 ${id} 的陷阱扣分超过积分余量`);
+ const negatives=Array.from({length:negativeCount},()=>{const value=id>100&&upgradeBudget>=90?-100:-10;if(value===-100)upgradeBudget-=90;return {effect:'subtract',value,radius:value===-100?1.7:1.25};});
+ const traps=[],specs=[{...negatives[0],target:{x:13.6+((id-1)%3)*3.4,z:17}},{effect:'zero',value:0,radius:1.45,target:{x:27.2,z:20.4+((id-1)%3)*3.4}}];
+ const baits=beans.filter(bean=>bean.value>=5).sort((a,b)=>b.value-a.value||distance(b)-distance(a)||a.id-b.id);
+ const baitSpec=(spec,index)=>{const bait=baits[index%baits.length],d=distance(bait),approach=Math.max(0,1-CELL*2/d);return {...spec,baitId:bait.id,target:{x:bait.x*approach,z:bait.z*approach}};};
+ negatives.slice(1).forEach((spec,index)=>specs.push(baitSpec(spec,index)));
+ for(let index=1;index<zeroCount;index++)specs.push(baitSpec({effect:'zero',value:0,radius:1.45},negativeCount-2+index));
  for(const spec of specs){
-  const safe=platforms.filter(p=>p.type==='plain'&&distance(p)>=10&&corridorDistance(p)>spec.radius+3.4&&distance(p,clearing)>clearing.radius+spec.radius+2&&portals.every(q=>distance(p,q)>spec.radius+4.6)&&checkpoints.every(q=>distance(p,q)>spec.radius+5.2)&&shields.every(q=>distance(p,q)>spec.radius+4.6)&&mechanics.every(q=>distance(p,q)>spec.radius+CELL*1.5)&&DIRECTIONS.every(([dx,dz])=>cells.get(cellKey(p.cx+dx,p.cz+dz))?.type==='plain'));
+  // Near-spawn tool pickups are within 12m. Keeping traps outside 16m also
+  // protects their pickup circles; distant tools use these same 3.4m grass cells.
+  const safe=platforms.filter(p=>p.type==='plain'&&distance(p)>=16&&corridorDistance(p)>spec.radius+3.4&&distance(p,clearing)>clearing.radius+spec.radius+2&&portals.every(q=>distance(p,q)>spec.radius+4.6)&&checkpoints.every(q=>distance(p,q)>spec.radius+5.2)&&shields.every(q=>distance(p,q)>spec.radius+4.6)&&mechanics.every(q=>distance(p,q)>spec.radius+CELL*1.5)&&TRAP_CLEARANCE_CELLS.every(([dx,dz])=>cells.get(cellKey(p.cx+dx,p.cz+dz))?.type==='plain'));
   const available=safe.filter(p=>[...beans,...traps].every(bean=>distance(p,bean)>=Math.max(6.8-1e-6,spec.radius+bean.radius+.86+.4)));
   const lattice=available.filter(p=>Math.abs(Math.round(p.x/CELL))%2===1&&Math.abs(Math.round(p.z/CELL))%2===0);
-  const chosen=(lattice.length?lattice:available).sort((a,b)=>distance(a,spec.target)-distance(b,spec.target)||a.id-b.id)[0];
+  const intendedBait=spec.baitId===undefined?null:beans[spec.baitId],score=p=>intendedBait?distance(p,intendedBait)+distance(p,spec.target)*.2:distance(p,spec.target);
+  const chosen=(lattice.length?lattice:available).sort((a,b)=>score(a)-score(b)||a.id-b.id)[0];
   if(!chosen)throw new Error(`地图 ${id} 缺少安全的陷阱豆位置`);
-  traps.push({id:beans.length+traps.length,x:chosen.x,z:chosen.z,y:spec.radius,cx:chosen.cx,cz:chosen.cz,effect:spec.effect,value:spec.value,radius:spec.radius});
+  const bait=intendedBait&&distance(chosen,intendedBait)>CELL*4?[...baits].sort((a,b)=>distance(chosen,a)-distance(chosen,b)||b.value-a.value||a.id-b.id)[0]:intendedBait;
+  traps.push({id:beans.length+traps.length,x:chosen.x,z:chosen.z,y:spec.radius,cx:chosen.cx,cz:chosen.cz,effect:spec.effect,value:spec.value,radius:spec.radius,...(bait?{baitId:bait.id}:{})});
  }
  return traps;
 }
@@ -164,16 +179,17 @@ export function makeLevel(id){
   const type=hazardTypes[(id+index*2)%hazardTypes.length];p.type=type;
   if(['bumper','sweeper','pendulum','pusher'].includes(type))hazards.push({id:hazards.length,type,x:p.x,z:p.z,y:0,w:2.8,phase:r()*Math.PI*2,speed:.7+chapter*.025,range:.85,radius:.65,axis:index%2?'x':'z'});
  }
- const {beans:positiveBeans,totalScore}=makeBeans(id,platforms,portals,clearing,shields,style,r);
+ const {beans:positiveBeans}=makeBeans(id,platforms,portals,clearing,shields,style,r);
  const monsters=makeMonsters(id,platforms,portals,clearing),enemyTier=Math.ceil(id/10);
- const penaltyTotal=id>100&&totalScore-100>=id+11?100:10;
- const beans=[...positiveBeans,...makeTrapBeans(id,positiveBeans,platforms,portals,clearing,shields,penaltyTotal)];
- // Upgrade only after traps are fixed so their position and penalty stay unchanged.
+ // Final positive values/radii are fixed first; only extra dangerous beans are
+ // placed around them, never moved or substituted into their positions.
  const refreshTotalScore=applyBeanRefresh(id,positiveBeans);
+ const trapBeans=makeTrapBeans(id,positiveBeans,platforms,portals,clearing,shields,refreshTotalScore),penaltyTotal=trapBeans.reduce((sum,bean)=>sum+Math.max(0,-bean.value),0);
+ const beans=[...positiveBeans,...trapBeans];
  const grassColors=['#83cc62','#8ed36d','#93d46a','#80c95e','#8bd373','#95d875','#82cd68','#8bd16a','#79c96c','#93d86d'];
  const patches=Array.from({length:5},(_,index)=>{const angle=index*Math.PI*.4+style*.21;return {x:Math.cos(angle)*half*CELL*.6,z:Math.sin(angle)*half*CELL*.6,radius:5+(id+index)%4,color:index%2?'#a3dc7f':'#6ebd54'};});
  const arena={open:true,style,name:MAP_STYLES[style],grassColor:grassColors[style],edgeColor:'#518a40',chefClearing:clearing,patches};
- return {id,code,chapter,worldIndex:wi,world,title:`${MAP_STYLES[style]} · ${id}`,layout:MAP_STYLES[style],size,cellSize:CELL,grid,platforms,walls:[],beans,hazards,portals,monsters,enemyTier,shields,signs:[],landmarks,arena,requiredScore:id+11,totalBeans:beans.length,totalScore:refreshTotalScore,penaltyTotal,spawn:{x:0,z:0,y:0},spawnPlatform:spawnPlatform.id,bounds:{minX:-size*CELL/2,maxX:size*CELL/2,minZ:-size*CELL/2,maxZ:size*CELL/2},difficulty:Math.min(5,1+Math.floor(id/220)),hint:`在开阔草地自由探索，收集豆子达到 ${id+11} 分就过关。${id>=501?'豆子有 1、5、10、100、500 和 1000 分。':id>100?'豆子有 1、5、10、100 和 500 分。':'豆子有 1、5 和 10 分。'}正分豆吃掉后 30 秒刷新，暂停时不计时。小心扣 ${penaltyTotal} 分豆；×0 豆会清空积分，并让已吃的正分豆重新出现。每颗陷阱豆每局只触发一次，可以绕行。绕开小片机关区域，A 门和 B 门分别成对传送。`,mechanics:[...new Set(platforms.filter(p=>!['plain','checkpoint'].includes(p.type)).map(p=>p.type))]};
+ return {id,code,chapter,worldIndex:wi,world,title:`${MAP_STYLES[style]} · ${id}`,layout:MAP_STYLES[style],size,cellSize:CELL,grid,platforms,walls:[],beans,hazards,portals,monsters,enemyTier,shields,signs:[],landmarks,arena,requiredScore:id+11,totalBeans:beans.length,totalScore:refreshTotalScore,penaltyTotal,spawn:{x:0,z:0,y:0},spawnPlatform:spawnPlatform.id,bounds:{minX:-size*CELL/2,maxX:size*CELL/2,minZ:-size*CELL/2,maxZ:size*CELL/2},difficulty:Math.min(5,1+Math.floor(id/220)),hint:`在开阔草地自由探索，收集豆子达到 ${id+11} 分就过关。${id>=501?'豆子有 1、5、10、100、500 和 1000 分。':id>100?'豆子有 1、5、10、100 和 500 分。':'豆子有 1、5 和 10 分。'}正分豆吃掉后 30 秒刷新，暂停时不计时。小心 ${trapBeans.filter(bean=>bean.effect==='subtract').length} 颗扣分豆，合计扣 ${penaltyTotal} 分；${trapBeans.filter(bean=>bean.effect==='zero').length} 颗 ×0 豆会清空积分，并让已吃的正分豆重新出现。高分豆附近可能有陷阱，每颗每局只触发一次，可以绕行。绕开小片机关区域，A 门和 B 门分别成对传送。`,mechanics:[...new Set(platforms.filter(p=>!['plain','checkpoint'].includes(p.type)).map(p=>p.type))]};
 }
 const levelCache=new Map(),LEVEL_CACHE_LIMIT=32;
 function cachedLevel(id){
