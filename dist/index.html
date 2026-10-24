@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
+<script>if(location.protocol==='file:')location.replace('http://localhost:4177/'+location.hash);</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#73bf1d">
-<meta name="description" content="蛋仔吃豆岛：1000张开阔草坪地图，第三人称探索，吃巨型分值豆子，积分达标过关。传送门、机关、100种敌人、三种武器与长按连发和一次性护盾。">
+<meta name="description" content="蛋仔吃豆岛：50关传送门闯关、地图拾取道具和咸鱼打击，同时按R+U+O复位，10秒冷却；另有1000张开放草坪吃豆地图。">
 <title>蛋仔吃豆岛 · 1000张开放地图</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/arena.css"><link rel="stylesheet" href="/adventure.css">
 </head>
 <body class="awaiting-start">
@@ -13,7 +14,7 @@
  <div class="tools"><button id="code-entry" class="code-button">地图码</button><button id="overview" class="icon-button" aria-label="切换全图视角" title="全图视角 M">▦</button><button id="sound" class="icon-button" aria-label="开启音效" title="开启音效">♫</button><button id="help" class="icon-button" aria-label="操作说明" title="操作说明">?</button><button id="pause" class="icon-button" aria-label="暂停游戏" title="暂停 Esc">Ⅱ</button></div>
 </header>
 <aside class="mission" aria-label="吃豆积分目标">
- <div class="eyebrow">第 <span id="level-number">1</span> / 1000 关</div><h1 id="mission-title">吃豆积分，闯过这一关</h1>
+ <div class="eyebrow">第 <span id="level-number">1</span> / <span id="level-total">1000</span> 关</div><h1 id="mission-title">吃豆积分，闯过这一关</h1>
  <div class="challenge-goal" id="challenge-goal" hidden><span>闯关模式</span><strong id="challenge-name">别踩岩浆</strong><small id="challenge-route">走到金色终点门</small></div>
  <div class="bean-goal"><span class="bean-icon crown" aria-hidden="true">♛</span><strong id="score-current">0</strong><span class="score-divider">/</span><b id="score-target">12</b><output id="score-pop" class="score-pop"></output></div>
  <p id="mission-tip">吃豆子，累计 12 分就过关！</p>
@@ -32,8 +33,8 @@
 <aside id="adventure-panel" class="adventure-panel" aria-label="Adventure tools"></aside><div class="weapon-panel" aria-label="选择武器，F或J攻击，Q切换"><div class="weapon-caption"><strong id="weapon-name">玩具锤</strong><span id="shield-status" class="shield-status">◇ 护盾可拾取</span></div><div class="weapon-slots"><button class="weapon-slot equipped" data-weapon="hammer" aria-label="装备玩具锤，按1" aria-pressed="true"><b>1</b><i>🔨</i><span>玩具锤</span></button><button class="weapon-slot" data-weapon="launcher" aria-label="装备泡泡发射器，按2" aria-pressed="false"><b>2</b><i>◉</i><span>发射器</span></button><button class="weapon-slot" data-weapon="sword" aria-label="装备能量剑，按3" aria-pressed="false"><b>3</b><i>✦</i><span>能量剑</span></button></div></div>
 <div class="scene-label"><span>DZ-001</span><strong>青草大乐园</strong></div>
 <div id="toast" role="status" aria-live="polite"></div>
-<div id="ready" class="ready"><span class="ready-tag">1000 张开放地图</span><h2>大口吃豆，自由冒险！</h2><p>吃豆达标过关</p><button id="start" class="primary">开始吃豆 <span>▶</span></button><small>WASD 移动 · 空格跳跃 · ? 操作说明</small></div>
-<footer class="bottom-controls"><div class="keyboard-guide"><div class="key-row"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><span>行走<small>也可用方向键</small></span><i></i><div><kbd>Space</kbd><span>跳跃</span></div><div><kbd>Shift</kbd><span>翻滚</span></div><div><kbd>E</kbd><span>飞扑</span></div><button id="restart" title="从本关起点重新开始；R返回检查点">↻ <span>重来</span></button></div><div id="touch-joystick" class="joystick" aria-label="拖动摇杆行走"><span></span><b>移动</b></div><div class="action-buttons"><button id="attack" class="action attack-action" aria-label="攻击，点按一发，长按每0.3秒连发"><span id="attack-symbol">🔨</span><strong>攻击</strong><small>F/J · 长按</small><i></i></button><button id="roll" class="action roll"><span>⟳</span><strong>翻滚</strong><small>Shift</small><i></i></button><button id="dive" class="action dive"><span>➤</span><strong>飞扑</strong><small>E</small><i></i></button><button id="jump" class="action jump"><span>↟</span><strong>跳跃</strong><small>Space</small></button></div></footer>
+<div id="ready" class="ready"><span class="ready-tag">50 关闯关 · 1000 张吃豆图</span><h2>拾取道具，穿过传送门！</h2><p>吃豆达标过关</p><button id="start-challenges" class="start-challenges">选择闯关 · 第 1–50 关 ↗</button><button id="start" class="primary">开始吃豆 <span>▶</span></button><small>WASD 移动 · 空格跳跃 · ? 操作说明</small></div>
+<footer class="bottom-controls"><div class="keyboard-guide"><div class="key-row"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><span>行走<small>也可用方向键</small></span><i></i><div><kbd>Space</kbd><span>跳跃</span></div><div><kbd>Shift</kbd><span>翻滚</span></div><div><kbd>E</kbd><span>飞扑</span></div><button id="restart" title="从本关起点重新开始；R+U+O复位 (10s)">↻ <span>重来</span></button></div><div id="touch-joystick" class="joystick" aria-label="拖动摇杆行走"><span></span><b>移动</b></div><div class="action-buttons"><button id="attack" class="action attack-action" aria-label="攻击，点按一发，长按每0.3秒连发"><span id="attack-symbol">🔨</span><strong>攻击</strong><small>F/J · 长按</small><i></i></button><button id="roll" class="action roll"><span>⟳</span><strong>翻滚</strong><small>Shift</small><i></i></button><button id="dive" class="action dive"><span>➤</span><strong>飞扑</strong><small>E</small><i></i></button><button id="jump" class="action jump"><span>↟</span><strong>跳跃</strong><small>Space</small></button></div></footer>
 <div id="modal" class="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1"><button id="modal-close" class="close-button" aria-label="关闭弹窗">×</button><div id="modal-content"></div></section></div>
 <div id="loading" class="loading"><img src="/favicon.svg" alt=""><strong>正在打开吃豆岛…</strong></div>
 <script type="module" src="/app.js"></script>

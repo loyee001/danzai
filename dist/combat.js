@@ -5,6 +5,7 @@ export const WEAPONS = {
   launcher: {name:'泡泡发射器', icon:'◉', damage:1, range:24, cooldown:0, duration:.18, color:'#53bbec'},
   sword: {name:'能量剑', icon:'✦', damage:1, range:3.8, cooldown:0, duration:.2, color:'#b28bff'}
 };
+export const FISH_RANGE=4.2,FISH_SWING_DURATION=.42;
 
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -23,7 +24,10 @@ function segmentBox(ax,az,bx,bz,box,padding=0){
 
 function blocked(game,from,to,padding=0,y=.8){
   for(const wall of game.level.walls||[]){
-    if(y<wall.h&&segmentBox(from.x,from.z,to.x,to.z,wall,padding))return true;
+    if(y<wall.h&&(wall.y===undefined||y>=wall.y)&&segmentBox(from.x,from.z,to.x,to.z,wall,padding))return true;
+  }
+  for(const crate of game.gadgets?.crates||[]){
+    if(y>=crate.y-1e-7&&y<crate.y+crate.h-1e-7&&segmentBox(from.x,from.z,to.x,to.z,crate,padding))return true;
   }
   for(const h of game.level.hazards||[]){
     if(h.type!=='gate'||Math.sin((game.time*h.speed+h.phase)*1.6)>.15||y>h.y+3.2)continue;
@@ -92,6 +96,23 @@ function hurtMonster(game,enemy,weapon,direction){
     enemy.defeated=true;enemy.state='defeated';game.defeatedMonsters++;
     game.emit('monsterDefeated',{id:enemy.id,rank:enemy.rank,tier:enemy.tier,enemyName:enemy.enemyName,x:enemy.x,z:enemy.z});
   }
+}
+
+export function fishStrike(game){
+  const p=game.player;if(p.health<=0)return false;
+  const length=Math.hypot(p.faceX||0,p.faceZ||0),faceX=length>.001?p.faceX/length:0,faceZ=length>.001?p.faceZ/length:1;
+  game.emit('fishStrike',{x:p.x,y:p.y??0,z:p.z,faceX,faceZ,range:FISH_RANGE});
+  for(const enemy of game.monsters||[]){
+    const d=distance(p,enemy),dot=d>.001?((enemy.x-p.x)*faceX+(enemy.z-p.z)*faceZ)/d:1;
+    if(enemy.defeated||d>FISH_RANGE||dot<.1||Math.abs((p.y??0)-(enemy.y??0))>=2.3||blocked(game,p,enemy,0,(p.y??0)+.8))continue;
+    const damage=enemy.hp,shieldDamage=enemy.shieldHP||0;
+    enemy.hp=0;enemy.shieldHP=0;enemy.hitFlash=.6;enemy.stun=0;enemy.windup=0;enemy.dash=0;enemy.provoked=0;enemy.route=[];
+    enemy.fishKnockback={x:d>.001?(enemy.x-p.x)/d:faceX,z:d>.001?(enemy.z-p.z)/d:faceZ};
+    enemy.defeated=true;enemy.state='defeated';game.defeatedMonsters++;
+    game.emit('monsterHit',{id:enemy.id,x:enemy.x,z:enemy.z,damage,shieldDamage,source:'fish'});
+    game.emit('monsterDefeated',{id:enemy.id,rank:enemy.rank,tier:enemy.tier,enemyName:enemy.enemyName,x:enemy.x,z:enemy.z,source:'fish'});
+  }
+  return true;
 }
 
 export function attack(game){
